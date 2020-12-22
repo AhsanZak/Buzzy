@@ -5,4 +5,5 @@ from . import views
 
 urlpatterns = [
     path('', views.admin_panel),
+    path('login', views.login),
 ]
