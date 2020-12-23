@@ -3,7 +3,6 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 
 
-
 # Create your views here.
 
 def admin_panel(request):
@@ -30,3 +29,8 @@ def login(request):
 
         else:
             return render(request, 'AdminPanel/login.html')
+
+def logout(request):
+    if request.session.has_key('password'):
+        request.session.flush()
+        return redirect(admin_panel)
