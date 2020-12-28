@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buzzy Register</title>
+    <title>Buzzy Create User</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -97,15 +97,12 @@
      <div class="main">
         <div class="col-md-6 col-sm-12">
            <div class="login-form">
-            <p>
-                Come join the Buzzy! Let's set up your Account.
-            </p>
             {% for message in messages %}
                 <div class="message">
                     <h4>{{message}}</h4>
                 </div>
             {% endfor %}
-            <form action="{% url 'register' %}" method="POST" class="form-group">
+            <form action="{% url 'create_user' %}" method="POST" class="form-group">
                 {% csrf_token %}
                 <div class="form-group">
                     <label>Full Name</label>

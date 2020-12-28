@@ -36,29 +36,32 @@ def login(request):
 
 def register(request):
     if request.method == 'POST':
-        name = request.POST['first_name']
+        first_name = request.POST['full_name']
         email = request.POST['email']
         username = request.POST['username']
+        last_name = request.POST['mobileNo']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-
-        dic = {'name': name, 'email': email, 'username': username}
 
         if password1 == password2:
             if User.objects.filter(username=username).exists():
                 messages.info(request, "Username Taken")
-                return render(request, 'User/signup.html', dic)
+                return render(request, 'User/signup.html')
             elif User.objects.filter(email=email).exists():
                 messages.info(request, "Email Taken")
-                return redirect(register)
+                return render(request, 'User/signup.html')
+            elif User.objects.filter(last_name=last_name).exists():
+                messages.info(request, "Mobile Number Taken")
+                return render(request, 'User/signup.html')
             else:
-                user = User.objects.create_user(username=username, password=password1, email=email, first_name=name)
+                user = User.objects.create_user(username=username, password=password1, email=email,
+                                                first_name=first_name,
+                                                last_name=last_name)
                 user.save()
-                print("User created")
-                return redirect(login)
+                return redirect('login')
         else:
             messages.info(request, "Passwords Not Matching")
-            return render(request, 'User/signup.html', dic)
+            return render(request, 'User/signup.html')
 
     else:
         return render(request, 'User/signup.html')
