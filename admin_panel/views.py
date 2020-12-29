@@ -37,7 +37,8 @@ def logout(request):
 
 def manage_user(request):
     if request.session.has_key('password'):
-        return render(request, 'AdminPanel/manage_user.html')
+        details = User.objects.all().order_by('id')
+        return render(request, 'AdminPanel/manage_user.html', {'user': details})
     else:
         return redirect(admin_panel)
 
@@ -79,3 +80,12 @@ def create_user(request):
             return render(request, 'AdminPanel/register_user.html')
     else:
         return redirect(admin_panel)
+
+def block_user(request):
+    pass
+
+def update_user(request):
+    pass
+
+def delete_user(request):
+    pass
