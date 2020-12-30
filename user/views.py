@@ -2,20 +2,32 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 
+
 # Create your views here.
+
+def common_home(request):
+    return render(request, 'User/index.html')
+
+def about(request):
+    return render(request, 'User/about.html')
+
+def contact(request):
+    return render(request, 'User/contact.html')
 
 def home(request):
     if request.user.is_authenticated:
         return redirect(user_home)
     else:
-        return render(request, 'User/index.html')
+        return render(request, 'User/about.html')
+
 
 def user_home(request):
-    if request.User.is_authenticated:
+    if request.user.is_authenticated:
         return render(request, 'User/UserHome.html')
     else:
         return redirect(login)
-    
+
+
 def login(request):
     if request.user.is_authenticated:
         return redirect(user_home)
@@ -33,6 +45,7 @@ def login(request):
             return redirect(login)
     else:
         return render(request, 'User/login.html')
+
 
 def register(request):
     if request.method == 'POST':

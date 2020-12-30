@@ -35,6 +35,7 @@ def logout(request):
     request.session.flush()
     return redirect(admin_panel)
 
+
 def manage_user(request):
     if request.session.has_key('password'):
         details = User.objects.all().order_by('id')
@@ -42,11 +43,13 @@ def manage_user(request):
     else:
         return redirect(admin_panel)
 
+
 def add_user(request):
     if request.session.has_key('password'):
         return render(request, 'AdminPanel/register_user.html')
     else:
         return redirect(admin_panel)
+
 
 def create_user(request):
     if request.session.has_key('password'):
@@ -81,11 +84,27 @@ def create_user(request):
     else:
         return redirect(admin_panel)
 
+
 def block_user(request):
     pass
+
 
 def update_user(request):
     pass
 
+
 def delete_user(request):
     pass
+
+
+def contents(request):
+    if request.session.has_key('password'):
+        return render(request, 'AdminPanel/contents.html')
+    else:
+        return redirect(admin_panel)
+
+def add_contents(request):
+    if request.session.has_key('password'):
+        return render(request, 'AdminPanel/AddContent.html')
+    else:
+        return redirect(admin_panel)

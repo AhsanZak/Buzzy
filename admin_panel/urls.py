@@ -14,4 +14,7 @@ urlpatterns = [
     path('update-user/<int:id>', views.update_user, name="update_user"),
     path('block-user/<int:id>', views.block_user, name="block_user"),
     path('delete-user/<int:id>', views.delete_user, name="delete_user"),
+
+    path('contents', views.contents, name="contents"),
+    path('add-contents', views.add_contents, name="add_contents"),
 ]
