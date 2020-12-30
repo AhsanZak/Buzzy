@@ -103,6 +103,7 @@ def contents(request):
     else:
         return redirect(admin_panel)
 
+
 def add_contents(request):
     if request.session.has_key('password'):
         return render(request, 'AdminPanel/AddContent.html')
