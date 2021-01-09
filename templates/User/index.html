@@ -1,381 +1,252 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Buzzy</title>
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+<title>Buzzy</title>
 
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="{% static 'User/assets/css/style-starter.css' %}">
-  </head>
-  <body>
-<!-- header -->
-<header id="site-header" class="fixed-top">
-  <div class="container">
-      <nav class="navbar navbar-expand-lg stroke">
-          <a class="navbar-brand" href="{% url 'common_home' %}">
-              <span class="fa fa-cube"></span> Buzzy
-          </a>
-          <!-- if logo is image enable this
-      <a class="navbar-brand" href="#index.html">
-          <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-      </a> -->
-          <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
-              data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-              aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
-              <span class="navbar-toggler-icon fa icon-close fa-times"></span>
-              </span>
-          </button>
+<link rel="icon" href="">
 
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-              <ul class="navbar-nav ml-auto">
-                  <li class="nav-item active">
-                      <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item @@about__active">
-                      <a class="nav-link" href="{% url 'about' %}">About</a>
-                  </li>
-                  <li class="nav-item @@contact__active">
-                      <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-                  </li>
-                  <li class="nav-item ml-3 mr-2">
-                      <a href="{% url 'home' %}" class="btn btn-primary btn-style">Wallpapers</a>
-                  </li>
-              </ul>
-          </div>
-          <!-- toggle switch for light and dark theme -->
-          <div class="mobile-position">
-              <nav class="navigation">
-                  <div class="theme-switch-wrapper">
-                      <label class="theme-switch" for="checkbox">
-                          <input type="checkbox" id="checkbox">
-                          <div class="mode-container">
-                              <i class="gg-sun"></i>
-                              <i class="gg-moon"></i>
-                          </div>
-                      </label>
-                  </div>
-              </nav>
-          </div>
-          <!-- //toggle switch for light and dark theme -->
-      </nav>
+<link rel="stylesheet" href="{% static 'cool/style.css' %}">
+</head>
+<body>
+
+  <div id="preloader">
+    <div class="loader"></div>
   </div>
-</header>
-<!-- //header -->
-<!-- banner -->
-<section class="banner w3pvt-banner" id="home">
-    <div class="container py-5">
-        <div class="banner-text py-md-4">
-            <div class="row banner-info">
-                <div class="col-lg-7 w3pvt-logo align-self">
-                    <h2>Buzzy is the # 1 phone personalization app in the world and helps you make sure your phone reflects you.</h2>
-                    <form>
-                        <button type="submit" class="btn" style="width:fit-content"><a href="{% url 'home' %}" style="color:white">Open Web App</a></button>
-                    </form>
-                </div>
-                <div class="col-lg-5 col-md-7 mt-lg-0 mt-4">
-                    <img src="{% static 'User/assets/images/screenshot.png' %}" alt="" class="img-fluid" />
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- //banner -->
 
-<!-- Top Creators -->
-<section class="w3l-features py-5" id="features">
-    <div class="call-w3 py-lg-5 py-md-4">
-        <div class="container">
-            <div class="row main-cont-wthree-2">
-                <div class="col-lg-6 feature-grid-left">
-                    <h3 class="title-big mb-4">Our Top Creators</h3>
-                    <ol class="w3l-right mt-4 mb-0">
-                        <li>Suspendisse non sed consequat magna a velit commodo</li>
-                        <li>Fusce eget ex fermentum, ultricies nisi ac sed et, init dolor sit</li>
-                        <li>Quisque venenatis eros et, init commodo risus amet.</li>
-                        <li>Suspendisse non sed consequat magna a velit</li>
-                    </ol>
 
-                    <a href="" class="btn btn-primary btn-style mt-md-5 mt-4">Be an Artist</a>
-                </div>
-                <div class="col-lg-6 feature-grid-right mt-lg-0 mt-5">
-                    <div class="call-grids-w3 d-grid">
-                        <div class="grids-1 box-wrap">
-                            <h4><a href="#feature" class="title-head">Gassali</a></h4>
-                            <p>Vivamus a ligula quam. Ut blandit eu leo non. Duis sed doloramet laoreet.</p>
-                        </div>
-                        <div class="grids-1 box-wrap">
-                            <h4><a href="#feature" class="title-head">Shaheen</a></h4>
-                            <p>Vivamus a ligula quam. Ut blandit eu leo non. Duis sed dolor amet laoreet.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- //Top Creators -->
+  <div class="top-search-area">
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
 
-<!-- middle -->
-	<div class="middle py-5">
-		<div class="container py-xl-5 py-lg-3">
-			<div class="welcome-left text-center py-md-3">
-                <h3 class="mb-4">This Mobile App is available for all devices. <br> i.e, Android and apple devices</h3>
-                <a href="#url"><img src="assets/images/android-store.png" alt="" width="170px" class="img-fluid"></a>
-				<a href="#url"><img src="assets/images/apple-store.png" alt="" width="220px" class="img-fluid"></a>
-				<p class="text-italic">* Available on iPhone, iPad and all Android devices</p>
-			</div>
-		</div>
-	</div>
-	<!-- //middle -->
-<!-- stats -->
-<section class="w3l-stats py-5" id="stats">
-    <div class="gallery-inner container py-md-5 py-4">
-        <div class="row stats-con">
-            <div class="col-md-3 col-6 stats_info counter_grid">
-                <span class="fa fa-users"></span>
-                <p class="counter">2020</p>
-                <h3>Customers</h3>
-            </div>
-            <div class="col-md-3 col-6 stats_info counter_grid1">
-                <span class="fa fa-download"></span>
-                <p class="counter">120</p>
-                <h3>Downloads</h3>
-            </div>
-            <div class="col-md-3 col-6 stats_info counter_grid mt-md-0 mt-5">
-                <span class="fa fa-smile-o"></span>
-                <p class="counter">1500</p>
-                <h3>Satisfied</h3>
-            </div>
-            <div class="col-md-3 col-6 stats_info counter_grid1 mt-md-0 mt-5">
-                <span class="fa fa-coffee"></span>
-                <p class="counter">120</p>
-                <h3>Cups of coffee</h3>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- //stats -->
+            <button type="button" class="btn close-btn" data-dismiss="modal"><i class="ti-close"></i></button>
 
-  <!-- footer-28 block -->
-  <section class="app-footer">
-    <footer class="footer-28">
-      <div class="footer-bg-layer">
-        <div class="container py-lg-3">
-          <div class="row footer-top-28">
-            <div class="col-lg-4 footer-list-28 mt-5">
-              <h6 class="footer-title-28">Contact information</h6>
-              <p>+91-9993332224</p>
-
-              <div class="main-social-footer-28 mt-3">
-                <ul class="social-icons">
-                  <li class="whatsapp">
-                    <a href="#link" title="Whatsapp" >
-                      <span class="fa fa-whatsapp" aria-hidden="true" style="background-color: rgb(59, 255, 52);"></span>
-                    </a>
-                  </li>
-                  <li class="twitter">
-                    <a href="#link" title="Twitter">
-                      <span class="fa fa-twitter" aria-hidden="true"></span>
-                    </a>
-                  </li>
-                  <li class="google">
-                    <a href="#link" title="Google">
-                      <span class="fa fa-google" aria-hidden="true"></span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-8">
-              <div class="row">
-                <div class="col-md-4 col-6 footer-list-28 mt-5">
-                  <h6 class="footer-title-28">Useful links</h6>
-                  <ul>
-                    <li><a href="features.html">Wallpapers</a></li>
-                    <li><a href="about.html">About us</a></li>
-                    <li><a href="#blog">For Artists</a></li>
-                  </ul>
-                </div>
-                <div class="col-md-4 col-6 footer-list-28 mt-5">
-                  <h6 class="footer-title-28">Product help</h6>
-                  <ul>
-                    <li><a href="#privacy">Privacy policy</a></li>
-                    <li><a href="#support"> Support</a></li>
-                    <li><a href="#terms">Terms & conditions</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="midd-footer-28 align-center py-4 mt-5">
-            <p class="copy-footer-28 text-center"> &copy; 2020 Buzzy. All Rights Reserved.</p>
+            <form action="" method="post">
+              <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enter...">
+              <button type="submit">Search</button>
+            </form>
           </div>
         </div>
-
-
       </div>
-    </footer>
+    </div>
+  </div>
 
-    <!-- move top -->
-    <button onclick="topFunction()" id="movetop" title="Go to top">
-      &#10548;
-    </button>
-    <script>
-      // When the user scrolls down 20px from the top of the document, show the button
-      window.onscroll = function () {
-        scrollFunction()
-      };
+  <header class="header-area">
 
-      function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-          document.getElementById("movetop").style.display = "block";
-        } else {
-          document.getElementById("movetop").style.display = "none";
-        }
-      }
+    <div class="main-header-area">
+      <div class="classy-nav-container breakpoint-off">
+        <div class="container">
 
-      // When the user clicks on the button, scroll to the top of the document
-      function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-      }
-    </script>
-    <!-- /move top -->
-  </section>
-  <!-- //footer-28 block -->
+          <nav class="classy-navbar justify-content-between" id="alimeNav">
 
-  <!-- all js scripts and files here -->
+          <a class="nav-brand" href="/"><h1 style="color:white">BUZZY</h1></a>
 
-  <script src="{% static 'User/assets/js/theme-change.js' %}"></script><!-- theme switch js (light and dark)-->
+          <div class="classy-navbar-toggler">
+            <span class="navbarToggler"><span></span><span></span><span></span></span>
+          </div>
 
-  <script src="{% static 'User/assets/js/jquery-3.3.1.min.js' %}"></script><!-- default jQuery -->
+          <div class="classy-menu">
 
-<!-- magnific popup -->
-<script src="{% static 'User/assets/js/jquery.magnific-popup.min.js' %}"></script>
+            <div class="classycloseIcon">
+              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+            </div>
+
+            <div class="classynav">
+              <ul id="nav">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Profile</a>
+                  <ul class="dropdown">
+                    <li><a href="{% url 'login' %}">- Login as User</a></li>
+                    <li><a href="{% url 'login' %}">- For Artists</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+                <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i class="ti-search"></i></div>
+            </div>
+
+          </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+<section class="welcome-area">
+  <div class="welcome-slides owl-carousel">
+
+    <div class="single-welcome-slide bg-img bg-overlay" style="background-image: url({% static 'cool/img/bg-img/1.jpg' %});">
+      <div class="container h-100">
+        <div class="row h-100 align-items-center">
+
+          <div class="col-12 col-lg-8 col-xl-6">
+            <div class="welcome-text">
+              <h2 data-animation="bounceInDown" data-delay="900ms">Hello <br>I'm Jackson</h2>
+              <p data-animation="bounceInDown" data-delay="500ms">I photograph very instinctively. I see how it is taken like that. I do not follow certain styles, philosophies or teachers.</p>
+              <div class="hero-btn-group" data-animation="bounceInDown" data-delay="100ms">
+                <a href="#" class="btn alime-btn mb-3 mb-sm-0 mr-4">Get a Quote</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="single-welcome-slide bg-img bg-overlay" style="background-image: url({% static 'cool/img/bg-img/2.jpg' %});">
+      <div class="container h-100">
+        <div class="row h-100 align-items-center">
+
+          <div class="col-12 col-lg-8 col-xl-6">
+            <div class="welcome-text">
+              <h2 data-animation="bounceInUp" data-delay="100ms">Hello <br>I'm Alime</h2>
+              <p data-animation="bounceInUp" data-delay="500ms">I photograph very instinctively. I see how it is taken like that. I do not follow certain styles, philosophies or teachers.</p>
+              <div class="hero-btn-group" data-animation="bounceInUp" data-delay="900ms">
+                <a href="#" class="btn alime-btn mb-3 mb-sm-0 mr-4">Get a Quote</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="alime-portfolio-area section-padding-80 clearfix">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+
+        <div class="alime-projects-menu">
+          <div class="portfolio-menu text-center">
+            <button class="btn active" data-filter="*">All</button>
+            <button class="btn" data-filter=".human">Human</button>
+            <button class="btn" data-filter=".nature">Nature</button>
+            <button class="btn" data-filter=".country">Country</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row alime-portfolio">
+    {% for image in contents %}
+
+      <div class="col-12 col-sm-6 col-lg-3 single_gallery_item nature mb-30 wow fadeInUp" data-wow-delay="100ms">
+        <div class="single-portfolio-content">
+          <img src="{{image.ImageURL}}" alt="">
+          <div class="hover-content">
+            <a href="{{image.ImageURL}}" class="portfolio-img">+</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    </div>
+    <div class="row">
+      <div class="col-12 text-center wow fadeInUp" data-wow-delay="700ms">
+        <a href="#" class="btn alime-btn btn-2 mt-15">View More</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="follow-area clearfix">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-heading text-center">
+          <h2>Follow Instagram</h2>
+          <p>@Alime_photographer</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instragram-feed-area owl-carousel">
+
+    <div class="single-instagram-item">
+    <img src="img/bg-img/11.jpg" alt="">
+    <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+    <a href="#">
+    <i class="ti-instagram" aria-hidden="true"></i>
+    <span>Alime_photographer</span>
+    </a>
+    </div>
+    </div>
+
+    <div class="single-instagram-item">
+    <img src="img/bg-img/12.jpg" alt="">
+    <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+    <a href="#">
+    <i class="ti-instagram" aria-hidden="true"></i>
+    <span>Alime_photographer</span>
+    </a>
+    </div>
+    </div>
+
+  </div>
+</section>
+
+
+<footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="footer-content d-flex align-items-center justify-content-between">
+
+          <div class="copywrite-text">
+            <p>
+              Copyright &copy;<script data-cfasync="false" src="https://preview.colorlib.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved.
+            </p>
+          </div>
+
+          <div class="footer-logo">
+            <a href="#"><img src="img/core-img/logo2.png" alt=""></a>
+          </div>
+
+          <div class="social-info">
+            <a href="#"><i class="ti-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-twitter-alt" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-linkedin" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-pinterest" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<script src="{% static 'cool/js/jquery.min.js' %}"></script>
+
+<script src="{% static 'cool/js/popper.min.js' %}"></script>
+
+<script src="{% static 'cool/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'cool/js/alime.bundle.js' %}"></script>
+
+<script src="{% static 'cool/js/default-assets/active.js' %}"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
-  $(document).ready(function () {
-    $('.popup-with-zoom-anim').magnificPopup({
-      type: 'inline',
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-      fixedContentPos: false,
-      fixedBgPos: true,
-
-      overflowY: 'auto',
-
-      closeBtnInside: true,
-      preloader: false,
-
-      midClick: true,
-      removalDelay: 300,
-      mainClass: 'my-mfp-zoom-in'
-    });
-
-    $('.popup-with-move-anim').magnificPopup({
-      type: 'inline',
-
-      fixedContentPos: false,
-      fixedBgPos: true,
-
-      overflowY: 'auto',
-
-      closeBtnInside: true,
-      preloader: false,
-
-      midClick: true,
-      removalDelay: 300,
-      mainClass: 'my-mfp-slide-bottom'
-    });
-  });
+  gtag('config', 'UA-23581568-13');
 </script>
-<!-- magnific popup -->
+</body>
 
-
-<script src="{% static 'User/assets/js/owl.carousel.js' %}"></script>
-<!-- script for tesimonials carousel slider -->
-<script>
-  $(document).ready(function () {
-    $("#owl-demo1").owlCarousel({
-      loop: true,
-      margin: 0,
-      nav: false,
-      responsiveClass: true,
-      responsive: {
-        0: {
-          items: 2,
-          nav: false
-        },
-        736: {
-          items: 3,
-          nav: false
-        },
-        1000: {
-          items: 4,
-          nav: false,
-          loop: false
-        }
-      }
-    })
-  })
-</script>
-<!-- //script for tesimonials carousel slider -->
-
-  <!-- stats number counter-->
-  <script src="{% static 'User/assets/js/jquery.waypoints.min.js' %}"></script>
-  <script src="{% static 'User/assets/js/jquery.countup.js' %}"></script>
-  <script>
-    $('.counter').countUp();
-  </script>
-  <!-- //stats number counter -->
-
-  <!-- disable body scroll which navbar is in active -->
-  <script>
-    $(function () {
-      $('.navbar-toggler').click(function () {
-        $('body').toggleClass('noscroll');
-      })
-    });
-  </script>
-  <!-- disable body scroll which navbar is in active -->
-
-  <!--/MENU-JS-->
-  <script>
-    $(window).on("scroll", function () {
-      var scroll = $(window).scrollTop();
-
-      if (scroll >= 80) {
-        $("#site-header").addClass("nav-fixed");
-      } else {
-        $("#site-header").removeClass("nav-fixed");
-      }
-    });
-
-    //Main navigation Active Class Add Remove
-    $(".navbar-toggler").on("click", function () {
-      $("header").toggleClass("active");
-    });
-    $(document).on("ready", function () {
-      if ($(window).width() > 991) {
-        $("header").removeClass("active");
-      }
-      $(window).on("resize", function () {
-        if ($(window).width() > 991) {
-          $("header").removeClass("active");
-        }
-      });
-    });
-  </script>
-  <!--//MENU-JS-->
-
-  <!-- bootstrap js -->
-  <script src="{% static 'User/assets/js/bootstrap.min.js' %}"></script>
-
-  </body>
-
-  </html>
+</html>

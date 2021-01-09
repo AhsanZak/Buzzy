@@ -294,6 +294,7 @@
                                         <th>No.</th>
                                         <th>Content ID</th>
                                         <th>Name</th>
+                                        <th>Image</th>
                                         <th>Category</th>
                                         <th>Download Type</th>
                                         <th>Rating</th>
@@ -302,18 +303,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for tid, x in table_data.items %}
+                                    {% for x in contents %}
                                     <tr>
                                         <td>{{forloop.counter}}</td>
-                                        <td>{{x.transaction_id}}</td>
-                                        <td>{{x.user.first_name}}</td>
-                                        <td>{{x.address.address}} ,{{x.address.city}},{{x.address.state}}</td>
-                                        <td>{{x.date_ordered}}</td>
-                                        <td>{{x.total_price}}</td>
-                                        <td>{{x.order_status}}</td>
-                                        <td>{{x.payment_mode}}</td>
+                                        <td>{{x.id}}</td>
+                                        <td>{{x.name}}</td>
+                                        <td><img style="height:50px; width:60px;" src="{{x.ImageURL}}"></td>
+                                        <td>{{x.category}}</td>
+                                        <td>Free</td>
+                                        <td>5*</td>
+                                        <td>766</td>
                                         <td>
-                                           <a href="{% url 'cancel_order' x.transaction_id %}" type="submit" class="btn btn-outline-danger btn-rounded">Cancel/Place Order</a>
+                                           <a href="{% url 'delete_content' x.id %}" type="submit" class="btn btn-outline-danger btn-rounded">Delete</a>
                                         </td>
                                     </tr>
                                     {% endfor %}

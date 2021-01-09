@@ -1,0 +1,272 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Buzzy</title>
+
+<link rel="icon" href="">
+<link rel="stylesheet" href="{% static 'cool/style.css' %}">
+</head>
+<body>
+
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
+
+
+  <div class="top-search-area">
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+
+            <button type="button" class="btn close-btn" data-dismiss="modal"><i class="ti-close"></i></button>
+
+            <form action="" method="post">
+              <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enter...">
+              <button type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header-area">
+
+    <div class="main-header-area">
+      <div class="classy-nav-container breakpoint-off">
+        <div class="container">
+
+          <nav class="classy-navbar justify-content-between" id="alimeNav">
+
+          <a class="nav-brand" href="/"><h1 style="color:white">BUZZY</h1></a>
+
+          <div class="classy-navbar-toggler">
+            <span class="navbarToggler"><span></span><span></span><span></span></span>
+          </div>
+
+          <div class="classy-menu">
+
+            <div class="classycloseIcon">
+              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+            </div>
+
+            <div class="classynav">
+              <ul id="nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Profile</a>
+                  <ul class="dropdown">
+
+                    {% if user.is_staff == 0 %}
+
+                    <li><a href="">- For Artists</a>
+                        <ul class="dropdown">
+                          <li><a href="{% url 'activate_creator' user.id %}">- Activate <i class="ti-check-box"></i></a></li>
+                        </ul>
+                    </li>
+
+                    {% elif user.is_staff == 1 %}
+
+                     <li><a href="">- For Artists</a>
+                        <ul class="dropdown">
+                          <li><a href="{% url 'deactivate_creator' user.id %}">- Deactivate</a></li>
+                          <li><a href="{% url 'creator' %}">- Dashboard</a></li>
+                          <li><a href="#">- Settings</a></li>
+                        </ul>
+                    </li>
+
+                    {% endif %}
+
+                    <li><a href="{% url 'profile_settings' %}">- Settings</a></li>
+                    <li><a href="{% url 'logout' %}">- Logout</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+                <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i class="ti-search"></i></div>
+            </div>
+
+          </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+<section class="welcome-area">
+  <div class="welcome-slides owl-carousel">
+
+    <div class="single-welcome-slide bg-img bg-overlay" style="background-image: url({% static 'cool/img/bg-img/1.jpg' %});">
+      <div class="container h-100">
+        <div class="row h-100 align-items-center">
+
+          <div class="col-12 col-lg-8 col-xl-6">
+            <div class="welcome-text">
+              <h2 data-animation="bounceInDown" data-delay="900ms">Hello <br>I'm Jackson</h2>
+              <p data-animation="bounceInDown" data-delay="500ms">I photograph very instinctively. I see how it is taken like that. I do not follow certain styles, philosophies or teachers.</p>
+              <div class="hero-btn-group" data-animation="bounceInDown" data-delay="100ms">
+                <a href="#" class="btn alime-btn mb-3 mb-sm-0 mr-4">Get a Quote</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="single-welcome-slide bg-img bg-overlay" style="background-image: url({% static 'cool/img/bg-img/2.jpg' %});">
+      <div class="container h-100">
+        <div class="row h-100 align-items-center">
+
+          <div class="col-12 col-lg-8 col-xl-6">
+            <div class="welcome-text">
+              <h2 data-animation="bounceInUp" data-delay="100ms">Hello <br>I'm Alime</h2>
+              <p data-animation="bounceInUp" data-delay="500ms">I photograph very instinctively. I see how it is taken like that. I do not follow certain styles, philosophies or teachers.</p>
+              <div class="hero-btn-group" data-animation="bounceInUp" data-delay="900ms">
+                <a href="#" class="btn alime-btn mb-3 mb-sm-0 mr-4">Get a Quote</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="alime-portfolio-area section-padding-80 clearfix">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+
+        <div class="alime-projects-menu">
+          <div class="portfolio-menu text-center">
+            <button class="btn active" data-filter="*">All</button>
+            <button class="btn" data-filter=".human">Human</button>
+            <button class="btn" data-filter=".nature">Nature</button>
+            <button class="btn" data-filter=".country">Country</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row alime-portfolio">
+    {% for image in contents %}
+
+      <div class="col-12 col-sm-6 col-lg-3 single_gallery_item nature mb-30 wow fadeInUp" data-wow-delay="100ms">
+        <div class="single-portfolio-content">
+          <img src="{{image.ImageURL}}" alt="">
+          <div class="hover-content">
+            <a href="{{image.ImageURL}}" class="portfolio-img">+</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    </div>
+    <div class="row">
+      <div class="col-12 text-center wow fadeInUp" data-wow-delay="700ms">
+        <a href="#" class="btn alime-btn btn-2 mt-15">View More</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="follow-area clearfix">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-heading text-center">
+          <h2>Follow Instagram</h2>
+          <p>@Alime_photographer</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instragram-feed-area owl-carousel">
+
+    <div class="single-instagram-item">
+    <img src="img/bg-img/11.jpg" alt="">
+    <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+    <a href="#">
+    <i class="ti-instagram" aria-hidden="true"></i>
+    <span>Alime_photographer</span>
+    </a>
+    </div>
+    </div>
+
+    <div class="single-instagram-item">
+    <img src="img/bg-img/12.jpg" alt="">
+    <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+    <a href="#">
+    <i class="ti-instagram" aria-hidden="true"></i>
+    <span>Alime_photographer</span>
+    </a>
+    </div>
+    </div>
+
+  </div>
+</section>
+
+
+<footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="footer-content d-flex align-items-center justify-content-between">
+
+          <div class="copywrite-text">
+            <p>
+              Copyright &copy;<script data-cfasync="false" src="https://preview.colorlib.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved.
+            </p>
+          </div>
+
+          <div class="footer-logo">
+            <a href="#"><img src="img/core-img/logo2.png" alt=""></a>
+          </div>
+
+          <div class="social-info">
+            <a href="#"><i class="ti-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-twitter-alt" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-linkedin" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-pinterest" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<script src="{% static 'cool/js/jquery.min.js' %}"></script>
+
+<script src="{% static 'cool/js/popper.min.js' %}"></script>
+
+<script src="{% static 'cool/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'cool/js/alime.bundle.js' %}"></script>
+
+<script src="{% static 'cool/js/default-assets/active.js' %}"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+</body>
+
+</html>

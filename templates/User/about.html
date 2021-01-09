@@ -18,11 +18,11 @@
 <header id="site-header" class="fixed-top">
   <div class="container">
       <nav class="navbar navbar-expand-lg stroke">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="">
               <span class="fa fa-cube"></span> Buzzy
           </a>
           <!-- if logo is image enable this
-      <a class="navbar-brand" href="#index.html">
+      <a class="navbar-brand" href="#about.html">
           <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
       </a> -->
           <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
@@ -38,16 +38,15 @@
                   <li class="nav-item active">
                       <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                   </li>
-                  <li class="nav-item active">
-                    <a class="nav-link" href="">About</a>
+                  <li class="nav-item @@about__active">
+                      <a class="nav-link" href="{% url 'about' %}">About</a>
                   </li>
-                  <li class="nav-item active">
-                    <a class="nav-link" href="">Creators</a>
+                  <li class="nav-item @@contact__active">
+                      <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                   </li>
-                  <li class="nav-item active">
-                    <a class="nav-link" href="">Login</a>
+                  <li class="nav-item ml-3 mr-2">
+                      <a href="{% url 'home' %}" class="btn btn-primary btn-style">Wallpapers</a>
                   </li>
-
               </ul>
           </div>
           <!-- toggle switch for light and dark theme -->
@@ -69,124 +68,161 @@
   </div>
 </header>
 <!-- //header -->
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-3 p-5">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+<!-- banner -->
+<section class="banner w3pvt-banner" id="home">
+    <div class="container py-5">
+        <div class="banner-text py-md-4">
+            <div class="row banner-info">
+                <div class="col-lg-7 w3pvt-logo align-self">
+                    <h2>Buzzy is the # 1 phone personalization app in the world and helps you make sure your phone reflects you.</h2>
+                    <form>
+                        <button type="submit" class="btn" style="width:fit-content"><a href="{% url 'home' %}" style="color:white">Open Web App</a></button>
+                    </form>
                 </div>
-              </div>
-        </div>
-        <div class="col-md-3 p-5">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="Scenery.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="col-lg-5 col-md-7 mt-lg-0 mt-4">
+                    <img src="{% static 'User/assets/images/screenshot.png' %}" alt="" class="img-fluid" />
                 </div>
-              </div>
-        </div>
-        <div class="col-md-3 p-5">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-        </div>
-        <div class="col-md-3 p-5">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-        </div>
-        <div class="col-md-3 p-5">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-        </div>
-        <div class="col-md-3 p-5">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-        </div>
-        <div class="col-md-3 p-5">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-        </div>
-        <div class="col-md-3 p-5">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-        </div>
-        <div class="col-md-3 p-5">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-        </div>
-        <div class="col-md-3 col-6 p-5">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
+            </div>
         </div>
     </div>
-    <div class="p-5" style="    margin: 16px;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    flex-direction: row;">
-    <a href="#" class="btn btn-primary" style="    border-radius: 24px; background: rgb(120, 61, 176); text-decoration: none; padding: 14px 18px; display: inline-flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; -webkit-box-flex: 1; flex-grow: 1; max-width: 345px; height: auto;"><h2 style="color:white">Load More</h2></a>
-    </div>
-</div>
+</section>
+<!-- //banner -->
 
+<!-- Top Creators -->
+<section class="w3l-features py-5" id="features">
+    <div class="call-w3 py-lg-5 py-md-4">
+        <div class="container">
+            <div class="row main-cont-wthree-2">
+                <div class="col-lg-6 feature-grid-left">
+                    <h3 class="title-big mb-4">Our Top Creators</h3>
+                    <ol class="w3l-right mt-4 mb-0">
+                        <li>Suspendisse non sed consequat magna a velit commodo</li>
+                        <li>Fusce eget ex fermentum, ultricies nisi ac sed et, init dolor sit</li>
+                        <li>Quisque venenatis eros et, init commodo risus amet.</li>
+                        <li>Suspendisse non sed consequat magna a velit</li>
+                    </ol>
+
+                    <a href="" class="btn btn-primary btn-style mt-md-5 mt-4">Be an Artist</a>
+                </div>
+                <div class="col-lg-6 feature-grid-right mt-lg-0 mt-5">
+                    <div class="call-grids-w3 d-grid">
+                        <div class="grids-1 box-wrap">
+                            <h4><a href="#feature" class="title-head">Gassali</a></h4>
+                            <p>Vivamus a ligula quam. Ut blandit eu leo non. Duis sed doloramet laoreet.</p>
+                        </div>
+                        <div class="grids-1 box-wrap">
+                            <h4><a href="#feature" class="title-head">Shaheen</a></h4>
+                            <p>Vivamus a ligula quam. Ut blandit eu leo non. Duis sed dolor amet laoreet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- //Top Creators -->
+
+<!-- middle -->
+	<div class="middle py-5">
+		<div class="container py-xl-5 py-lg-3">
+			<div class="welcome-left text-center py-md-3">
+                <h3 class="mb-4">This Mobile App is available for all devices. <br> i.e, Android and apple devices</h3>
+                <a href="#url"><img src="assets/images/android-store.png" alt="" width="170px" class="img-fluid"></a>
+				<a href="#url"><img src="assets/images/apple-store.png" alt="" width="220px" class="img-fluid"></a>
+				<p class="text-italic">* Available on iPhone, iPad and all Android devices</p>
+			</div>
+		</div>
+	</div>
+	<!-- //middle -->
+<!-- stats -->
+<section class="w3l-stats py-5" id="stats">
+    <div class="gallery-inner container py-md-5 py-4">
+        <div class="row stats-con">
+            <div class="col-md-3 col-6 stats_info counter_grid">
+                <span class="fa fa-users"></span>
+                <p class="counter">2020</p>
+                <h3>Customers</h3>
+            </div>
+            <div class="col-md-3 col-6 stats_info counter_grid1">
+                <span class="fa fa-download"></span>
+                <p class="counter">120</p>
+                <h3>Downloads</h3>
+            </div>
+            <div class="col-md-3 col-6 stats_info counter_grid mt-md-0 mt-5">
+                <span class="fa fa-smile-o"></span>
+                <p class="counter">1500</p>
+                <h3>Satisfied</h3>
+            </div>
+            <div class="col-md-3 col-6 stats_info counter_grid1 mt-md-0 mt-5">
+                <span class="fa fa-coffee"></span>
+                <p class="counter">120</p>
+                <h3>Cups of coffee</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- //stats -->
 
   <!-- footer-28 block -->
   <section class="app-footer">
+    <footer class="footer-28">
+      <div class="footer-bg-layer">
+        <div class="container py-lg-3">
+          <div class="row footer-top-28">
+            <div class="col-lg-4 footer-list-28 mt-5">
+              <h6 class="footer-title-28">Contact information</h6>
+              <p>+91-9993332224</p>
+
+              <div class="main-social-footer-28 mt-3">
+                <ul class="social-icons">
+                  <li class="whatsapp">
+                    <a href="#link" title="Whatsapp" >
+                      <span class="fa fa-whatsapp" aria-hidden="true" style="background-color: rgb(59, 255, 52);"></span>
+                    </a>
+                  </li>
+                  <li class="twitter">
+                    <a href="#link" title="Twitter">
+                      <span class="fa fa-twitter" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                  <li class="google">
+                    <a href="#link" title="Google">
+                      <span class="fa fa-google" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="row">
+                <div class="col-md-4 col-6 footer-list-28 mt-5">
+                  <h6 class="footer-title-28">Useful links</h6>
+                  <ul>
+                    <li><a href="features.html">Wallpapers</a></li>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="#blog">For Artists</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-4 col-6 footer-list-28 mt-5">
+                  <h6 class="footer-title-28">Product help</h6>
+                  <ul>
+                    <li><a href="#privacy">Privacy policy</a></li>
+                    <li><a href="#support"> Support</a></li>
+                    <li><a href="#terms">Terms & conditions</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="midd-footer-28 align-center py-4 mt-5">
+            <p class="copy-footer-28 text-center"> &copy; 2020 Buzzy. All Rights Reserved.</p>
+          </div>
+        </div>
+
+
+      </div>
+    </footer>
+
     <!-- move top -->
     <button onclick="topFunction()" id="movetop" title="Go to top">
       &#10548;

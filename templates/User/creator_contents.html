@@ -1,0 +1,278 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Buzzy</title>
+
+<link rel="icon" href="">
+
+  <!-- Custom fonts for this template-->
+  <link href="{% static 'AdminPanel/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="{% static 'AdminPanel/css/sb-admin-2.min.css' %}" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'cool/style.css' %}">
+</head>
+<body>
+
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
+
+
+  <div class="top-search-area">
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+
+            <button type="button" class="btn close-btn" data-dismiss="modal"><i class="ti-close"></i></button>
+
+            <form action="" method="post">
+              <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enter...">
+              <button type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header-area">
+
+    <div class="main-header-area">
+      <div class="classy-nav-container breakpoint-off">
+        <div class="container">
+
+          <nav class="classy-navbar justify-content-between" id="alimeNav">
+
+          <a class="nav-brand" href="/"><h1 style="color:white">BUZZY</h1></a>
+
+          <div class="classy-navbar-toggler">
+            <span class="navbarToggler"><span></span><span></span><span></span></span>
+          </div>
+
+          <div class="classy-menu">
+
+            <div class="classycloseIcon">
+              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+            </div>
+
+            <div class="classynav">
+              <ul id="nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Profile</a>
+                    <ul class="dropdown">
+
+                    {% if user.is_staff == 0 %}
+
+                    <li><a href="">- For Artists</a>
+                        <ul class="dropdown">
+                          <li><a href="{% url 'activate_creator' user.id %}">- Activate <i class="ti-check-box"></i></a></li>
+                        </ul>
+                    </li>
+
+                    {% elif user.is_staff == 1 %}
+
+                     <li><a href="">- For Artists</a>
+                        <ul class="dropdown">
+                          <li><a href="{% url 'deactivate_creator' user.id %}">- Deactivate</a></li>
+                          <li><a href="{% url 'creator' %}">- Dashboard</a></li>
+                          <li><a href="#">- Settings</a></li>
+                        </ul>
+                    </li>
+
+                    {% endif %}
+
+                    <li><a href="{% url 'profile_settings' %}">- Settings</a></li>
+                    <li><a href="{% url 'logout' %}">- Logout</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+                <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i class="ti-search"></i></div>
+            </div>
+
+          </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+<section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url({% static 'cool/img/bg-img/38.jpg' %});">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-12">
+        <div class="breadcrumb-content text-center">
+          <h2 class="page-title">Creator Dashboard</h2>
+           <nav aria-label="breadcrumb">
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #fc6060 !important; background-image: none;">
+
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Contents
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Manage contents</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header"></h6>
+            <a class="collapse-item" href="{% url 'creator_contents' %}">Contents</a>
+            <a class="collapse-item" href="{% url 'creator_upload' %}">Upload New Content</a>
+            <div class="collapse-divider"></div>
+          </div>
+        </div>
+      </li>
+
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+
+
+          <!-- Content Row -->
+          <div class="row">
+
+
+
+          </div>
+          <!-- Content Row -->
+
+          <div class="row">
+
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- End of Main Content -->
+    </div>
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+
+
+
+
+
+<footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="footer-content d-flex align-items-center justify-content-between">
+
+          <div class="copywrite-text">
+            <p>
+              Copyright &copy;<script data-cfasync="false" src="https://preview.colorlib.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved.
+            </p>
+          </div>
+
+          <div class="footer-logo">
+            <a href="#"><img src="img/core-img/logo2.png" alt=""></a>
+          </div>
+
+          <div class="social-info">
+            <a href="#"><i class="ti-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-twitter-alt" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-linkedin" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-pinterest" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<script src="{% static 'cool/js/jquery.min.js' %}"></script>
+
+<script src="{% static 'cool/js/popper.min.js' %}"></script>
+
+<script src="{% static 'cool/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'cool/js/alime.bundle.js' %}"></script>
+
+<script src="{% static 'cool/js/default-assets/active.js' %}"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="{% static 'AdminPanel/vendor/jquery/jquery.min.js' %}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="{% static 'AdminPanel/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{% static 'AdminPanel/js/sb-admin-2.min.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,31 +1,35 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from .models import *
+from admin_panel.models import ImageDetail
+import mimetypes
+from wsgiref.util import FileWrapper
 
-
-# Create your views here.
-
-def common_home(request):
-    return render(request, 'User/index.html')
-
-def about(request):
-    return render(request, 'User/about.html')
-
-def contact(request):
-    return render(request, 'User/contact.html')
 
 def home(request):
     if request.user.is_authenticated:
         return redirect(user_home)
     else:
-        return render(request, 'User/about.html')
+        contents = ImageDetail.objects.all()
+        return render(request, 'User/index.html', {'contents': contents})
 
 
 def user_home(request):
     if request.user.is_authenticated:
-        return render(request, 'User/UserHome.html')
+        contents = ImageDetail.objects.all()
+        user = request.user
+        return render(request, 'User/home.html', {'contents': contents, 'user': user})
     else:
-        return redirect(login)
+        return redirect(home)
+
+
+def about(request):
+    return render(request, 'User/about.html')
+
+
+def contact(request):
+    return render(request, 'User/contact.html')
 
 
 def login(request):
@@ -81,4 +85,77 @@ def register(request):
 
 
 def logout(request):
+    if request.user.is_authenticated:
+        auth.logout(request)
+        return redirect(home)
+    else:
+        return redirect(home)
+
+
+def single(request, image_id):
+    content = ImageDetail.objects.filter(id=image_id).first()
+    print(content.image)
+    return render(request, 'User/single.html', {'content': content})
+
+
+def activate_creator(request, user_id):
+    if request.user.is_authenticated:
+        user = User.objects.get(id=user_id)
+        if user.is_staff == False:
+            user.is_staff = True
+            user.save()
+        return redirect(user_home)
+    else:
+        return redirect(login)
+
+
+def Deactivate_creator(request, user_id):
+    if request.user.is_authenticated:
+        user = User.objects.get(id=user_id)
+        if user.is_staff == True:
+            user.is_staff = False
+            user.save()
+        return redirect(user_home)
+    else:
+        return redirect(login)
+
+
+def creator(request):
+    if request.user.is_authenticated:
+        return render(request, 'User/creator.html')
+    else:
+        return redirect(login)
+
+
+def creator_contents(request):
+    if request.user.is_authenticated:
+        return render(request, 'User/creator_contents.html')
+    else:
+        return redirect(login)
+
+
+def creator_upload(request):
+    if request.user.is_authenticated:
+        return render(request, 'User/creator_upload.html')
+    else:
+        return redirect(login)
+
+
+def creator_settings(request):
     pass
+
+
+def profile_settings(request):
+    pass
+
+
+def download_image(request, image_id):
+    image = ImageDetail.objects.get(id=image_id)
+    image_url = image.image_url()
+
+    wrapper = FileWrapper(open(image_url, 'rb'))
+
+    content_type = mimetypes.guess_type(image_url)[0]
+    response = HttpResponse(wrapper, mimetype=content_type)
+    response['Content-Disposition'] = "attachment; filename=%s" % image_url
+    return response

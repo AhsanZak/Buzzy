@@ -1,122 +1,183 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buzzy Login</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Buzzy</title>
+
+<link rel="icon" href="">
+
+<link rel="stylesheet" href="{% static 'cool/style.css' %}">
 </head>
 <body>
-    <style>
-        body {
-            font-family: "Lato", sans-serif;
-        }
+
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
 
 
+  <div class="top-search-area">
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
 
-        .main-head{
-            height: 150px;
-            background: #FFF;
+            <button type="button" class="btn close-btn" data-dismiss="modal"><i class="ti-close"></i></button>
 
-        }
-
-        .sidenav {
-            height: 100%;
-            background-color: #000;
-            overflow-x: hidden;
-            padding-top: 20px;
-        }
-
-
-        .main {
-            padding: 0px 10px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .sidenav {padding-top: 15px;}
-        }
-
-        @media screen and (max-width: 450px) {
-            .login-form{
-                margin-top: 10%;
-            }
-
-            .register-form{
-                margin-top: 10%;
-            }
-        }
-
-        @media screen and (min-width: 768px){
-            .main{
-                margin-left: 40%;
-            }
-
-            .sidenav{
-                width: 40%;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                left: 0;
-            }
-
-            .login-form{
-                margin-top: 80%;
-            }
-
-            .register-form{
-                margin-top: 20%;
-            }
-        }
-
-
-        .login-main-text{
-            margin-top: 20%;
-            padding: 60px;
-            color: #fff;
-        }
-
-        .login-main-text h2{
-            font-weight: 300;
-        }
-
-        .btn-black{
-            background-color: #000 !important;
-            color: #fff;
-        }
-        .message{
-            color: red
-        }
-    </style>
-    <div class="sidenav">
-        <div class="login-main-text">
-           <h2>Login Page</h2>
+            <form action="" method="post">
+              <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enter...">
+              <button type="submit">Search</button>
+            </form>
+          </div>
         </div>
-     </div>
-     <div class="main">
-        <div class="col-md-6 col-sm-12">
-           <div class="login-form">
-            {% for message in messages %}
-                <div class="message">
-                    {{message}}
+      </div>
+    </div>
+  </div>
+
+  <header class="header-area">
+
+    <div class="main-header-area">
+      <div class="classy-nav-container breakpoint-off">
+        <div class="container">
+
+          <nav class="classy-navbar justify-content-between" id="alimeNav">
+
+          <a class="nav-brand" href="/"><h1 style="color:white">BUZZY</h1></a>
+
+          <div class="classy-navbar-toggler">
+            <span class="navbarToggler"><span></span><span></span><span></span></span>
+          </div>
+
+          <div class="classy-menu">
+
+            <div class="classycloseIcon">
+              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+            </div>
+
+            <div class="classynav">
+              <ul id="nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Profile</a>
+                  <ul class="dropdown">
+                    <li><a href="{% url 'login' %}">- Login as User</a></li>
+                    <li><a href="{% url 'login' %}">- For Artists</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+                <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i class="ti-search"></i></div>
+            </div>
+
+          </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+<section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url({% static 'cool/img/bg-img/38.jpg' %});">
+<div class="container h-100">
+<div class="row h-100 align-items-center">
+<div class="col-12">
+<div class="breadcrumb-content text-center">
+<h2 class="page-title">Login BUZZY</h2>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb justify-content-center">
+</ol>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+    <div class="comment-area section-padding-80">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+
+                    <div class="alime-contact-form mt-50">
+                        <h4 class="mb-30">Dont have an account?<a href="{% url 'register' %}" style="color:#fc6060">Register Here</a></h4>
+
+                        <form action="{% url 'login' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12 col-md-12">
+                                    <input type="text" name="username" class="form-control mb-30" placeholder="Username">
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <input type="password" name="password" class="form-control mb-30" placeholder="Password">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn alime-btn btn-2 mt-15">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            {% endfor %}
-              <form method="POST" >
-                 {% csrf_token %}
-                 <div class="form-group">
-                    <label>User Name</label>
-                    <input name="username"  type="text" class="form-control" placeholder="User Name">
-                 </div>
-                 <div class="form-group">
-                    <label>Password</label>
-                    <input name="password" type="password" class="form-control" placeholder="Password">
-                 </div>
-                 <button type="submit" class="btn btn-black">Login</button>
-              </form>
-           </div>
+            </div>
         </div>
-     </div>
+    </div>
+
+
+
+
+<footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="footer-content d-flex align-items-center justify-content-between">
+
+          <div class="copywrite-text">
+            <p>
+              Copyright &copy;<script data-cfasync="false" src="https://preview.colorlib.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved.
+            </p>
+          </div>
+
+          <div class="footer-logo">
+            <a href="#"><img src="img/core-img/logo2.png" alt=""></a>
+          </div>
+
+          <div class="social-info">
+            <a href="#"><i class="ti-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-twitter-alt" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-linkedin" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-pinterest" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<script src="{% static 'cool/js/jquery.min.js' %}"></script>
+
+<script src="{% static 'cool/js/popper.min.js' %}"></script>
+
+<script src="{% static 'cool/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'cool/js/alime.bundle.js' %}"></script>
+
+<script src="{% static 'cool/js/default-assets/active.js' %}"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
 </body>
+
+<!-- Mirrored from preview.colorlib.com/theme/alime/single-blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Jan 2021 06:35:38 GMT -->
 </html>

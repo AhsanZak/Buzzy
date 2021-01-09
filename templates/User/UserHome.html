@@ -1,10 +1,258 @@
-<!DOCTYPE html>
+{% load static %}
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>User Home</h1>
-</body>
-</html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Buzzy</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'User/assets/css/style-starter.css' %}">
+  </head>
+  <body>
+<!-- header -->
+<header id="site-header" class="fixed-top">
+  <div class="container">
+      <nav class="navbar navbar-expand-lg stroke">
+          <a class="navbar-brand" href="/">
+              <span class="fa fa-cube"></span> Buzzy
+          </a>
+          <!-- if logo is image enable this
+      <a class="navbar-brand" href="#about.html">
+          <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+      </a> -->
+          <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+              data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+              <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+              </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active">
+                      <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="">About</a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'creator' %}">Creators</a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                  </li>
+
+              </ul>
+          </div>
+          <!-- toggle switch for light and dark theme -->
+          <div class="mobile-position">
+              <nav class="navigation">
+                  <div class="theme-switch-wrapper">
+                      <label class="theme-switch" for="checkbox">
+                          <input type="checkbox" id="checkbox">
+                          <div class="mode-container">
+                              <i class="gg-sun"></i>
+                              <i class="gg-moon"></i>
+                          </div>
+                      </label>
+                  </div>
+              </nav>
+          </div>
+          <!-- //toggle switch for light and dark theme -->
+      </nav>
+  </div>
+</header>
+<!-- //header -->
+
+<div class="container" style="padding-top: 8em;">
+    <div class="row">
+        {% for x in contents %}
+        <div class="item p-2">
+            <a href="{% url 'single' x.id %}"><img src="{{x.ImageURL}}" class="img-fluid" alt="client-img" style="height:30em; width:20em"></a>
+            <a href="{% url 'single' x.id %}"><h3 style="text-align:center;">{{x.name}}</h3></a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!--Load More Button -->
+<!--    <div class="p-5" style="    margin: 16px;-->
+<!--    display: flex;-->
+<!--    -webkit-box-align: center;-->
+<!--    align-items: center;-->
+<!--    -webkit-box-pack: center;-->
+<!--    justify-content: center;-->
+<!--    flex-direction: row;">-->
+<!--    <a href="#" class="btn btn-primary" style="    border-radius: 24px; background: rgb(120, 61, 176); text-decoration: none; padding: 14px 18px; display: inline-flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; -webkit-box-flex: 1; flex-grow: 1; max-width: 345px; height: auto;"><h2 style="color:white">Load More</h2></a>-->
+<!--    </div>-->
+    <!-- //Load More Button -->
+
+</div>
+
+
+  <!-- footer-28 block -->
+  <section class="app-footer">
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+      &#10548;
+    </button>
+    <script>
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function () {
+        scrollFunction()
+      };
+
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          document.getElementById("movetop").style.display = "block";
+        } else {
+          document.getElementById("movetop").style.display = "none";
+        }
+      }
+
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+    </script>
+    <!-- /move top -->
+  </section>
+  <!-- //footer-28 block -->
+
+  <!-- all js scripts and files here -->
+
+  <script src="{% static 'User/assets/js/theme-change.js' %}"></script><!-- theme switch js (light and dark)-->
+
+  <script src="{% static 'User/assets/js/jquery-3.3.1.min.js' %}"></script><!-- default jQuery -->
+
+<!-- magnific popup -->
+<script src="{% static 'User/assets/js/jquery.magnific-popup.min.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('.popup-with-zoom-anim').magnificPopup({
+      type: 'inline',
+
+      fixedContentPos: false,
+      fixedBgPos: true,
+
+      overflowY: 'auto',
+
+      closeBtnInside: true,
+      preloader: false,
+
+      midClick: true,
+      removalDelay: 300,
+      mainClass: 'my-mfp-zoom-in'
+    });
+
+    $('.popup-with-move-anim').magnificPopup({
+      type: 'inline',
+
+      fixedContentPos: false,
+      fixedBgPos: true,
+
+      overflowY: 'auto',
+
+      closeBtnInside: true,
+      preloader: false,
+
+      midClick: true,
+      removalDelay: 300,
+      mainClass: 'my-mfp-slide-bottom'
+    });
+  });
+</script>
+<!-- magnific popup -->
+
+
+<script src="{% static 'User/assets/js/owl.carousel.js' %}"></script>
+<!-- script for tesimonials carousel slider -->
+<script>
+  $(document).ready(function () {
+    $("#owl-demo1").owlCarousel({
+      loop: true,
+      margin: 0,
+      nav: false,
+      responsiveClass: true,
+      responsive: {
+        0: {
+          items: 2,
+          nav: false
+        },
+        736: {
+          items: 3,
+          nav: false
+        },
+        1000: {
+          items: 4,
+          nav: false,
+          loop: false
+        }
+      }
+    })
+  })
+</script>
+<!-- //script for tesimonials carousel slider -->
+
+  <!-- stats number counter-->
+  <script src="{% static 'User/assets/js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'User/assets/js/jquery.countup.js' %}"></script>
+  <script>
+    $('.counter').countUp();
+  </script>
+  <!-- //stats number counter -->
+
+  <!-- disable body scroll which navbar is in active -->
+  <script>
+    $(function () {
+      $('.navbar-toggler').click(function () {
+        $('body').toggleClass('noscroll');
+      })
+    });
+  </script>
+  <!-- disable body scroll which navbar is in active -->
+
+  <!--/MENU-JS-->
+  <script>
+    $(window).on("scroll", function () {
+      var scroll = $(window).scrollTop();
+
+      if (scroll >= 80) {
+        $("#site-header").addClass("nav-fixed");
+      } else {
+        $("#site-header").removeClass("nav-fixed");
+      }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function () {
+      $("header").toggleClass("active");
+    });
+    $(document).on("ready", function () {
+      if ($(window).width() > 991) {
+        $("header").removeClass("active");
+      }
+      $(window).on("resize", function () {
+        if ($(window).width() > 991) {
+          $("header").removeClass("active");
+        }
+      });
+    });
+  </script>
+  <!--//MENU-JS-->
+
+  <!-- bootstrap js -->
+  <script src="{% static 'User/assets/js/bootstrap.min.js' %}"></script>
+ <script src="{% static 'web/js/jquery-2.1.4.min.js' %}"></script>
+ <!-- //jquery -->
+ <script src="{% static 'web/js/bootstrap.js' %}"></script>
+
+  </body>
+
+  </html>

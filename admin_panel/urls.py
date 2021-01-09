@@ -12,9 +12,11 @@ urlpatterns = [
     path('add-user', views.add_user, name="add_user"),
     path('create-user', views.create_user, name="create_user"),
     path('update-user/<int:id>', views.update_user, name="update_user"),
-    path('block-user/<int:id>', views.block_user, name="block_user"),
+    path('block-user/<int:user_id>', views.block_user, name="block_user"),
     path('delete-user/<int:id>', views.delete_user, name="delete_user"),
+
 
     path('contents', views.contents, name="contents"),
     path('add-contents', views.add_contents, name="add_contents"),
+    path('delete-content/<int:id>', views.delete_content, name="delete_content"),
 ]
