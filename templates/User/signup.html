@@ -104,8 +104,10 @@
                 <div class="col-lg-9">
 
                     <div class="alime-contact-form mt-50">
-                        <h4 class="mb-30">Dont have an account?<a href="{% url 'register' %}" style="color:#fc6060">Register Here</a></h4>
-
+                        <h4 class="mb-30">Have an account?<a href="{% url 'login' %}" style="color:#fc6060">Login</a></h4>
+                        {% for message in messages %}
+                        <h5 style="color:red;">{{message}}</h5>
+                        {% endfor %}
                         <form action="{% url 'register' %}" method="POST">
                             {% csrf_token %}
                             <div class="row">

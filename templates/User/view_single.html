@@ -3,228 +3,294 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="description" content="">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Buzzy</title>
+    <title>Buzzy</title>
 
-<link rel="icon" href="">
-<link rel="stylesheet" href="{% static 'cool/style.css' %}">
-  	<link href="{% static 'web/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link rel="icon" href="">
+    <link rel="stylesheet" href="{% static 'cool/style.css' %}">
+    <link href="{% static 'web/css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
 
 </head>
 <body>
 
-  <div id="preloader">
+<div id="preloader">
     <div class="loader"></div>
-  </div>
-
-
-  <div class="top-search-area">
-    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-
-            <button type="button" class="btn close-btn" data-dismiss="modal"><i class="ti-close"></i></button>
-
-            <form action="" method="post">
-              <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enterrr...">
-              <button type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!--- ImageModal -->
-<!-- Modal -->
-<div class="modal fade" id="ImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img src="{% static 'cool/img/bg-img/3.jpg' %}">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Download</button>
-      </div>
-    </div>
-  </div>
 </div>
 
-  <header class="header-area" style="background-color: black !important;">
+
+<div class="top-search-area">
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <button type="button" class="btn close-btn" data-dismiss="modal"><i class="ti-close"></i></button>
+
+                    <form action="" method="post">
+                        <input type="search" name="top-search-bar" class="form-control"
+                               placeholder="Search and hit enterrr...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- rating-modal -->
+
+<div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Rate this Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="rating1">
+            <span class="starRating">
+                <input id="rating5" type="radio" name="rating" value="5" readonly>
+                <label for="rating5">5</label>
+                <input id="rating4" type="radio" name="rating" value="4" readonly>
+                <label for="rating4">4</label>
+                <input id="rating3" type="radio" name="rating" value="3" checked="" readonly>
+                <label for="rating3">3</label>
+                <input id="rating2" type="radio" name="rating" value="2" readonly>
+                <label for="rating2">2</label>
+                <input id="rating1" type="radio" name="rating" value="1" readonly>
+                <label for="rating1">1</label>
+            </span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Rate</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--rating-modal-->
+
+
+<header class="header-area" style="background-color: black !important;">
 
     <div class="main-header-area">
-      <div class="classy-nav-container breakpoint-off">
-        <div class="container" >
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
 
-          <nav class="classy-navbar justify-content-between" id="alimeNav" >
+                <nav class="classy-navbar justify-content-between" id="alimeNav">
 
-            <a class="nav-brand" href="/"><h1 style="color:white">BUZZY</h1></a>
+                    <a class="nav-brand" href="/"><h1 style="color:white">BUZZY</h1></a>
 
-            <div class="classy-navbar-toggler">
-              <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <div class="classy-menu">
+
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <div class="classynav">
+                            <ul id="nav">
+                                <li class="active"><a href="/">Home</a></li>
+                                <li><a href="{% url 'about' %}">About</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="#">Profile</a>
+                                    <ul class="dropdown">
+
+                                        {% if user.is_staff == 0 %}
+
+                                        <li><a href="">- For Artists</a>
+                                            <ul class="dropdown">
+                                                <li><a href="{% url 'activate_creator' user.id %}">- Activate <i
+                                                        class="ti-check-box"></i></a></li>
+                                            </ul>
+                                        </li>
+
+                                        {% elif user.is_staff == 1 %}
+
+                                        <li><a href="">- For Artists</a>
+                                            <ul class="dropdown">
+                                                <li><a href="{% url 'deactivate_creator' user.id %}">- Deactivate</a>
+                                                </li>
+                                                <li><a href="{% url 'creator' %}">- Dashboard</a></li>
+                                                <li><a href="#">- Settings</a></li>
+                                            </ul>
+                                        </li>
+
+                                        {% endif %}
+
+                                        <li><a href="{% url 'profile_settings' %}">- Settings</a></li>
+                                        <li><a href="{% url 'logout' %}">- Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i
+                                    class="ti-search"></i></div>
+                        </div>
+
+                    </div>
+                </nav>
             </div>
+        </div>
+    </div>
+</header>
 
-            <div class="classy-menu">
 
-              <div class="classycloseIcon">
-                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-              </div>
+<div class="banner-bootom-w3-agileits">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <form class="form" action="" method="POST" id="registrationForm">
+                            {% csrf_token %}
+                            <div class="container" style="padding-top: 2em !important;">
+                                <div class="row">
 
-              <div class="classynav">
-                <ul id="nav">
-                  <li class="active"><a href="/">Home</a></li>
-                  <li><a href="{% url 'about' %}">About</a></li>
-                  <li><a href="contact.html">Contact</a></li>
-                  <li><a href="#">Profile</a>
-                    <ul class="dropdown">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-xs-6">
+                                                <a href="{{content.ImageURL}}"><img style="height:auto; width:auto;" src="{{content.ImageURL}}"
+                                                     class="avatar img-circle img-thumbnail" alt="avatar"></a>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                      {% if user.is_staff == 0 %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-xs-6">
+                                                <label><h5 style="color:#FF5722;">{{content.name}}</h5>
+                                                    <h6>{{content.category}}</h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-6">
+                                                <label><h6>Rating : </h6>
+                                                </label>
+                                                <div class="rating1">
+                                            <span class="starRating">
+                                                <input id="rating5" type="radio" name="rating" value="5">
+                                                <label for="rating5">5</label>
+                                                <input id="rating4" type="radio" name="rating" value="4">
+                                                <label for="rating4">4</label>
+                                                <input id="rating3" type="radio" name="rating" value="3" checked="">
+                                                <label for="rating3">3</label>
+                                                <input id="rating2" type="radio" name="rating" value="2">
+                                                <label for="rating2">2</label>
+                                                <input id="rating1" type="radio" name="rating" value="1">
+                                                <label for="rating1">1</label>
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-6">
+                                                <label><h6>{{content.description}}Another rainy day here
+                                                    today - off for my Sunday run - at least it won't be hot - LOL.
+                                                    Thanks for
+                                                    stopping by - will be by to see you all when I return.</h6></label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-6">
+                                                <label>
+                                                    <div style="clear: both">
+                                                        <h6 style="float: left;">Uploaded By : &nbsp;</h6>
+                                                        <h6 style="float: right;">{{content.user}}</h6>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-6">
+                                                <label>
+                                                    <div style="clear: both">
+                                                        <h6 style="float: left;">Shot On : &nbsp;</h6>
+                                                        <i class="ti-camera"></i>&nbsp;
+                                                        <h6 style="float: right;">{{content.camera}}Canon EOS Digital
+                                                            Rebel XTi</h6>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="occasion-cart">
+                                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                                    <div data-wow-delay="700ms" data-toggle="modal"
+                                                         data-target="#ratingModal">
+                                                        <a href="#" class="btn alime-btn btn-2 mt-15">Rate this
+                                                            Image</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                      <li><a href="">- For Artists</a>
-                          <ul class="dropdown">
-                            <li><a href="{% url 'activate_creator' user.id %}">- Activate <i class="ti-check-box"></i></a></li>
-                          </ul>
-                      </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
 
-                      {% elif user.is_staff == 1 %}
+                        <div class="occasion-cart">
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                <fieldset>
+                                    <a href="{{content.ImageURL}}" download><input type="submit" name="submit"
+                                                                                   value="Download" class="button"/></a>
+                                </fieldset>
+                            </div>
 
-                       <li><a href="">- For Artists</a>
-                          <ul class="dropdown">
-                            <li><a href="{% url 'deactivate_creator' user.id %}">- Deactivate</a></li>
-                            <li><a href="{% url 'creator' %}">- Dashboard</a></li>
-                            <li><a href="#">- Settings</a></li>
-                          </ul>
-                      </li>
+                        </div>
 
-                      {% endif %}
+                    </div><!--/tab-pane-->
+                </div><!--/tab-content-->
+            </div><!---Col sm -12-->
+        </div><!--row-->
 
-                      <li><a href="{% url 'profile_settings' %}">- Settings</a></li>
-                      <li><a href="{% url 'logout' %}">- Logout</a></li>
-                    </ul>
-                  </li>
-                </ul>
+    </div>
+</div>
 
-                  <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i class="ti-search"></i></div>
-              </div>
 
+<footer class="footer-area" style="padding: 0px !important;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="footer-content d-flex align-items-center justify-content-between">
+
+                    <div class="copywrite-text">
+                        <p>
+                            Copyright &copy;<script data-cfasync="false"
+                                                    src="https://preview.colorlib.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                            <script>document.write(new Date().getFullYear());</script>
+                            All rights reserved.
+                        </p>
+                    </div>
+
+                    <div class="footer-logo">
+                        <a href="#"><img src="img/core-img/logo2.png" alt=""></a>
+                    </div>
+
+                    <div class="social-info">
+                        <a href="#"><i class="ti-facebook" aria-hidden="true"></i></a>
+                        <a href="#"><i class="ti-twitter-alt" aria-hidden="true"></i></a>
+                        <a href="#"><i class="ti-linkedin" aria-hidden="true"></i></a>
+                        <a href="#"><i class="ti-pinterest" aria-hidden="true"></i></a>
+                    </div>
+                </div>
             </div>
-          </nav>
         </div>
-      </div>
     </div>
-  </header>
-
-
-  <div class="alime-portfolio-area section-padding-80 clearfix">
-  <div class="container">
-  </div>
-  </div>
-
-
-  <!-- Single Page -->
-	<div class="banner-bootom-w3-agileits">
-		<div class="container">
-
-			<!-- //tittle heading -->
-			<div class="col-md-5 ">
-				<div class="grid images_3_of_2">
-					<div class="flexslider">
-                        <a href=""><img src="{{content.ImageURL}}" class="img-fluid" alt="client-img"></a>
-					</div>
-				</div>
-			</div>
-          &nbsp;
-			<div class="col-md-7 simpleCart_shelfItem">
-				<h3>{{content.name}}</h3>
-                <h3>Uploaded By : {{content.user}}</h3>
-				<div class="rating1">
-					<span class="starRating">
-						<input id="rating5" type="radio" name="rating" value="5">
-						<label for="rating5">5</label>
-						<input id="rating4" type="radio" name="rating" value="4">
-						<label for="rating4">4</label>
-						<input id="rating3" type="radio" name="rating" value="3" checked="">
-						<label for="rating3">3</label>
-						<input id="rating2" type="radio" name="rating" value="2">
-						<label for="rating2">2</label>
-						<input id="rating1" type="radio" name="rating" value="1">
-						<label for="rating1">1</label>
-					</span>
-				</div>
-				<p>
-					<span class="item_price">{{product.product_price}}</span>
-				</p>
-
-				<div class="product-single-w3l">
-					<ul>
-                        <li>
-							 <i class="ti-camera">&nbsp; Canon</i>
-						</li>
-						<li>
-							{{content.description}}
-						</li>
-
-					</ul>
-					<p>
-						</i>Best shots are done with great efforts.
-					</p>
-				</div>
-				<div class="occasion-cart">
-					<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-							<fieldset>
-								<a href="{{content.ImageURL}}" download><input type="submit" name="submit" value="Download" class="button" /></a>
-
-							</fieldset>
-					</div>
-
-				</div>
-
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-	<!-- //Single Page -->
-
-
-<footer class="footer-area">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="footer-content d-flex align-items-center justify-content-between">
-
-          <div class="copywrite-text">
-            <p>
-              Copyright &copy;<script data-cfasync="false" src="https://preview.colorlib.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved.
-            </p>
-          </div>
-
-          <div class="footer-logo">
-            <a href="#"><img src="img/core-img/logo2.png" alt=""></a>
-          </div>
-
-          <div class="social-info">
-            <a href="#"><i class="ti-facebook" aria-hidden="true"></i></a>
-            <a href="#"><i class="ti-twitter-alt" aria-hidden="true"></i></a>
-            <a href="#"><i class="ti-linkedin" aria-hidden="true"></i></a>
-            <a href="#"><i class="ti-pinterest" aria-hidden="true"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </footer>
-
 
 
 <script src="{% static 'cool/js/jquery.min.js' %}"></script>
@@ -244,6 +310,7 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-23581568-13');
+
 </script>
 </body>
 

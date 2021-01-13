@@ -17,12 +17,12 @@ urlpatterns = [
     path('creator', views.creator, name="creator"),
     path('creator-contents', views.creator_contents, name="creator_contents"),
     path('creator-upload', views.creator_upload, name="creator_upload"),
+    path('delete-content/<int:id>', views.delete_content, name="delete_content"),
 
     path('profile-settings', views.profile_settings, name="profile_settings"),
     path('edit-profile', views.edit_userProfile, name="edit_userProfile"),
     path('creator-settings', views.creator_settings, name="creator_settings"),
 
     path('view-single/<int:image_id>', views.view_single, name="view_single"),
-    path('single/<int:image_id>', views.single, name="single"),
     path('download-image/<int:image_id>', views.download_image, name="download_image")
 ]

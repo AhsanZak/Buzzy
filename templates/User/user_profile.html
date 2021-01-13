@@ -135,7 +135,7 @@
 <!---------------------Profile---------------------------->
   <div class="container bootstrap snippet">
     <div class="row">
-        <div class="col-sm-10" ><h3 style="color:black; text-transform:uppercase;">{{username}}</h3></div>
+        <div class="col-sm-10" ><h4 style="color:black; text-transform:uppercase;">{{user.username}}</h4></div>
     </div>
     <div class="row">
     	<div class="col-sm-12">
@@ -143,63 +143,60 @@
             <div class="tab-pane active" id="home">
                   <form class="form" action="{% url 'edit_userProfile' %}" method="POST" id="registrationForm"  enctype="multipart/form-data">
                       {% csrf_token %}
-                      <div class="form-group">
-                          <div class="col-xs-6">
-                              {% for x in profile %}
-                                <img style="height:20em; width:20em;" src="{{x.ImageURL}}" class="avatar img-circle img-thumbnail" alt="avatar">
-                              {% endfor %}
+                      <div class="container">
+                          <div class="row">
+
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <div class="col-xs-6">
+                                          {% for x in profile %}
+                                            <img style="height:20em; width:20em;" src="{{x.ImageURL}}" class="avatar img-circle img-thumbnail" alt="avatar">
+                                          {% endfor %}
+                                      </div>
+                                  </div>
+                                   <div class="form-group">
+                                     <div class="col-xs-6">
+                                          <label for="user_image"><h6 style="color:#FF5722;">Upload Profile Image</h6></label>
+                                          <input type="file" name="user_image">
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                  <div class="form-group">
+
+                                      <div class="col-xs-6" >
+                                          <label for="first_name"><h6 style="color:#FF5722;">First name</h6></label>
+                                          <input type="text" class="form-control" name="first_name" id="first_name" value="{{user.first_name}}" readonly>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <div class="col-xs-6">
+                                         <label for="mobile"><h6 style="color:#FF5722;">Mobile</h6></label>
+                                          {% for x in profile %}
+                                          <input type="text" class="form-control" name="mobileNo" id="mobile" value="{{x.mobile_number}}" readonly>
+                                          {% endfor %}
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+
+                                      <div class="col-xs-6">
+                                          <label for="email"><h6 style="color:#FF5722;">Email</h6></label>
+                                          <input type="email" class="form-control" name="email" id="email" value="{{user.email}}" readonly>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                       <div class="col-xs-12">
+                                            <br>
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <button class="btn btn-md btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                        </div>
+                                  </div>
+
+                              </div>
                           </div>
                       </div>
-                      <div class="form-group">
-
-                          <div class="col-xs-6" >
-                              <label for="first_name"><h4 style="color:#FF5722;">First name</h4></label>
-                              <input type="text" class="form-control" name="first_name" id="first_name" value="{{user.first_name}}" >
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <div class="col-xs-6">
-                             <label for="mobile"><h4 style="color:#FF5722;">Mobile</h4></label>
-                              {% for x in profile %}
-                              <input type="text" class="form-control" name="mobileNo" id="mobile" value="{{x.mobile_number}}" readonly>
-                              {% endfor %}
-                          </div>
-                      </div>
-                      <div class="form-group">
-
-                          <div class="col-xs-6">
-                              <label for="email"><h4 style="color:#FF5722;">Email</h4></label>
-                              <input type="email" class="form-control" name="email" id="email" value="{{user.email}}" readonly>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                         <div class="col-xs-6">
-                              <label for="user_image"><h4 style="color:#FF5722;">Upload Profile Image</h4></label>
-                              <input type="file" name="user_image">
-                          </div>
-                      </div>
-
-                      <div class="form-group">
-                           <div class="col-xs-12">
-                                <br>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                               <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                            </div>
-                      </div>
-
-                        <!-- button for adding img -->
-<!--                       &nbsp;&nbsp;&nbsp;-->
-<!--                        <div class="input-group form-group">-->
-<!--                        &nbsp; &nbsp; &nbsp; <button type="file" class="btn btn-primary" id="img-button">Add/Change DP</button>-->
-<!--                        </div>-->
-
-<!--                        &lt;!&ndash; result of cropped img &ndash;&gt;-->
-<!--                        <img id="cropped" class="cropped" src="">-->
-
-<!--                        &lt;!&ndash; hidden field &ndash;&gt;-->
-<!--                        <input class="d-none" style="display: none" type="file" id="file-input">-->
-<!--                        <textarea name="pro_img" class="d-none" style="display: none" id="imageBaseData"></textarea>-->
-
               	</form>
 
           </div><!--/tab-pane-->

@@ -14,13 +14,14 @@ def home(request):
     if request.user.is_authenticated:
         return redirect(user_home)
     else:
-        contents = ImageDetail.objects.filter(approval="approved")
+        user = request.user
+        contents = ImageDetail.objects.filter(approval="approved", user__is_staff=True)
         return render(request, 'User/index.html', {'contents': contents})
 
 
 def user_home(request):
     if request.user.is_authenticated:
-        contents = ImageDetail.objects.filter(approval="approved")
+        contents = ImageDetail.objects.filter(approval="approved", user__is_staff=True)
         user = request.user
         return render(request, 'User/home.html', {'contents': contents, 'user': user})
     else:
@@ -95,12 +96,6 @@ def logout(request):
         return redirect(home)
 
 
-def single(request, image_id):
-    content = ImageDetail.objects.filter(id=image_id).first()
-    print(content.image)
-    return render(request, 'User/single.html', {'content': content})
-
-
 def view_single(request, image_id):
     content = ImageDetail.objects.filter(id=image_id).first()
     return render(request, 'User/view_single.html', {'content': content})
@@ -143,6 +138,14 @@ def creator_contents(request):
     else:
         return redirect(login)
 
+
+def delete_content(request, id):
+    if request.user.is_authenticated:
+        content = ImageDetail.objects.filter(id=id)
+        content.delete()
+        return redirect(creator_contents)
+    else:
+        return redirect(login)
 
 def creator_upload(request):
     if request.user.is_authenticated:
@@ -195,20 +198,15 @@ def edit_userProfile(request):
         if request.method == 'POST':
             user = request.user
             user_image = request.FILES.get('user_image')
-            first_name = request.POST['first_name']
 
-            # if data is not None:
-            #     profilepic = UserProfile.objects.filter(user=user)
-            #     if not profilepic:
-            #         UserProfile.objects.create(user_image=data, user=user)
-            #     else:
-            #         user_profile1 = UserProfile.objects.get(user=user)
-            #         user_profile1.user_image = data
-            #         user_profile1.save()
-
-            user_profile = UserProfile.objects.get(user=user)
-            user_profile.user_image = user_image
-            user_profile.save()
+            if user_image is not None:
+                user_profile = UserProfile.objects.filter(user=user)
+                if not user_profile:
+                    UserProfile.objects.create(user_image=user_image, user=user)
+                else:
+                    user_profile = UserProfile.objects.get(user=user)
+                    user_profile.user_image = user_image
+                    user_profile.save()
 
             return redirect(profile_settings)
 
