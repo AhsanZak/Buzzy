@@ -1,141 +1,198 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buzzy Register</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Buzzy</title>
+
+<link rel="icon" href="">
+
+<link rel="stylesheet" href="{% static 'cool/style.css' %}">
 </head>
- <style>
-        body {
-            font-family: "Lato", sans-serif;
-        }
-
-        .main-head{
-            height: 150px;
-            background: #FFF;
-
-        }
-
-        .sidenav {
-            height: 100%;
-            background-color: #000;
-            overflow-x: hidden;
-            padding-top: 20px;
-        }
-
-
-        .main {
-            padding: 0px 10px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .sidenav {padding-top: 15px;}
-        }
-
-        @media screen and (max-width: 450px) {
-            .login-form{
-                margin-top: 10%;
-            }
-
-            .register-form{
-                margin-top: 10%;
-            }
-        }
-
-        @media screen and (min-width: 768px){
-            .main{
-                margin-left: 40%;
-            }
-
-            .sidenav{
-                width: 40%;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                left: 0;
-            }
-
-            .login-form{
-                margin-top: 80%;
-            }
-
-            .register-form{
-                margin-top: 20%;
-            }
-        }
-
-
-        .login-main-text{
-            margin-top: 20%;
-            padding: 60px;
-            color: #fff;
-        }
-
-        .login-main-text h2{
-            font-weight: 300;
-        }
-
-        .btn-black{
-            background-color: #000 !important;
-            color: #fff;
-        }
-        .message{
-            color: red
-        }
-    </style>
-
 <body>
-    <div class="sidenav">
-        <div class="login-main-text">
-           <h2>Sign Up Page</h2>
-        </div>
-     </div>
-     <div class="main">
-        <div class="col-md-6 col-sm-12">
-           <div class="login-form">
-            <p>
-                Come join the Buzzy! Let's set up your Account.
-            </p>
-            {% for message in messages %}
-                <div class="message">
-                    <h4>{{message}}</h4>
-                </div>
-            {% endfor %}
-            <form action="{% url 'register' %}" method="POST" class="form-group">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input name="full_name"  type="text" class="form-control" style="color:black" placeholder="Full Name" required="">
-                 </div>
-                <div class="form-group">
-                    <label>User Name</label>
-                    <input name="username"  type="text" class="form-control" style="color:black" placeholder="Username" required="">
-                 </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input name="email"  type="email" class="form-control" style="color:black" placeholder="Email" required="">
-                 </div>
-                <div class="form-group">
-                    <label>Mobile Number</label>
-                    <input name="mobileNo"  type="text" class="form-control" style="color:black" placeholder="Mobile Number" required="">
-                 </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input name="password1"  type="password" class="form-control" style="color:black" placeholder="Password" required="">
-                 </div>
-                <div class="form-group">
-                    <label>Confirm Password</label>
-                    <input name="password2"  type="password" class="form-control" style="color:black" placeholder="Confirm Password" required="">
-                 </div>
 
-                <button class="btn btn-primary shadow-2 mb-4">Register</button>
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
+
+
+  <div class="top-search-area">
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+
+            <button type="button" class="btn close-btn" data-dismiss="modal"><i class="ti-close"></i></button>
+
+            <form action="" method="post">
+              <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enter...">
+              <button type="submit">Search</button>
             </form>
-           </div>
+          </div>
         </div>
-     </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header-area">
+
+    <div class="main-header-area">
+      <div class="classy-nav-container breakpoint-off">
+        <div class="container">
+
+          <nav class="classy-navbar justify-content-between" id="alimeNav">
+
+          <a class="nav-brand" href="/"><h1 style="color:white">BUZZY</h1></a>
+
+          <div class="classy-navbar-toggler">
+            <span class="navbarToggler"><span></span><span></span><span></span></span>
+          </div>
+
+          <div class="classy-menu">
+
+            <div class="classycloseIcon">
+              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+            </div>
+
+            <div class="classynav">
+              <ul id="nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Profile</a>
+                  <ul class="dropdown">
+                    <li><a href="{% url 'login' %}">- Login as User</a></li>
+                    <li><a href="{% url 'login' %}">- For Artists</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+                <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i class="ti-search"></i></div>
+            </div>
+
+          </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+<section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url({% static 'cool/img/bg-img/38.jpg' %});">
+<div class="container h-100">
+<div class="row h-100 align-items-center">
+<div class="col-12">
+<div class="breadcrumb-content text-center">
+<h2 class="page-title">Register BUZZY</h2>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb justify-content-center">
+</ol>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+    <div class="comment-area section-padding-80">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+
+                    <div class="alime-contact-form mt-50">
+                        <h4 class="mb-30">Dont have an account?<a href="{% url 'register' %}" style="color:#fc6060">Register Here</a></h4>
+
+                        <form action="{% url 'register' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12 col-md-12">
+                                    <input type="text" name="first_name" class="form-control mb-30" placeholder="First Name">
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <input type="text" name="last_name" class="form-control mb-30" placeholder="Last Name">
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <input type="text" name="username" class="form-control mb-30" placeholder="User Name">
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <input type="number" name="mobile_no" class="form-control mb-30" placeholder="Mobile Number">
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <input type="password" name="password1" class="form-control mb-30" placeholder="Password">
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <input type="password" name="password2" class="form-control mb-30" placeholder="Password">
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <input type="email" name="email" class="form-control mb-30" placeholder="Email">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn alime-btn btn-2 mt-15">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="footer-content d-flex align-items-center justify-content-between">
+
+          <div class="copywrite-text">
+            <p>
+              Copyright &copy;<script data-cfasync="false" src="https://preview.colorlib.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved.
+            </p>
+          </div>
+
+          <div class="footer-logo">
+            <a href="#"><img src="img/core-img/logo2.png" alt=""></a>
+          </div>
+
+          <div class="social-info">
+            <a href="#"><i class="ti-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-twitter-alt" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-linkedin" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-pinterest" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<script src="{% static 'cool/js/jquery.min.js' %}"></script>
+
+<script src="{% static 'cool/js/popper.min.js' %}"></script>
+
+<script src="{% static 'cool/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'cool/js/alime.bundle.js' %}"></script>
+
+<script src="{% static 'cool/js/default-assets/active.js' %}"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
 </body>
+
+<!-- Mirrored from preview.colorlib.com/theme/alime/single-blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Jan 2021 06:35:38 GMT -->
 </html>

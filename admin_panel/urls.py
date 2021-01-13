@@ -18,5 +18,9 @@ urlpatterns = [
 
     path('contents', views.contents, name="contents"),
     path('add-contents', views.add_contents, name="add_contents"),
+    path('approve-contents', views.approve_contents, name="approve_contents"),
+    path('disapprove-contents', views.disapprove_contents, name="disapprove_contents"),
+    path('approved-contents/<int:id>', views.approved_contents, name="approved_contents"),
+    path('disapproved-contents/<int:id>', views.disapproved_contents, name="disapproved_contents"),
     path('delete-content/<int:id>', views.delete_content, name="delete_content"),
 ]

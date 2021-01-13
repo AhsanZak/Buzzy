@@ -102,8 +102,9 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header"></h6>
             <a class="collapse-item" href="{% url 'contents' %}">Contents</a>
-            <a class="collapse-item" href="">Add a new Content</a>
-            <a class="collapse-item" href="">Approve Creator</a>
+            <a class="collapse-item" href="{% url 'add_contents' %}">Add a new Content</a>
+            <a class="collapse-item" href="{% url 'approve_contents' %}">Approve Contents</a>
+            <a class="collapse-item" href="{% url 'disapprove_contents' %}">Disapprove Contents</a>
             <div class="collapse-divider"></div>
           </div>
         </div>
@@ -286,7 +287,7 @@
 
           <!-- Content Row -->
 
-           <div class="box box-primary">
+                    <div class="box box-primary">
                         <div class="box-body">
                             <table width="100%" class="table table-hover" id="dataTables-example">
                                 <thead>

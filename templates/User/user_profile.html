@@ -1,0 +1,263 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Buzzy</title>
+
+<link rel="icon" href="">
+<link rel="stylesheet" href="{% static 'cool/style.css' %}">
+</head>
+<body>
+
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
+
+
+  <div class="top-search-area">
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+
+            <button type="button" class="btn close-btn" data-dismiss="modal"><i class="ti-close"></i></button>
+
+            <form action="" method="post">
+              <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enterrr...">
+              <button type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--- ImageModal -->
+<!-- Modal -->
+<div class="modal fade" id="ImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="{% static 'cool/img/bg-img/3.jpg' %}">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Download</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <header class="header-area" style="background-color: black !important;">
+
+    <div class="main-header-area">
+      <div class="classy-nav-container breakpoint-off">
+        <div class="container" >
+
+          <nav class="classy-navbar justify-content-between" id="alimeNav" >
+
+            <a class="nav-brand" href="/"><h1 style="color:white">BUZZY</h1></a>
+
+            <div class="classy-navbar-toggler">
+              <span class="navbarToggler"><span></span><span></span><span></span></span>
+            </div>
+
+            <div class="classy-menu">
+
+              <div class="classycloseIcon">
+                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+              </div>
+
+              <div class="classynav">
+                <ul id="nav">
+                  <li class="active"><a href="/">Home</a></li>
+                  <li><a href="{% url 'about' %}">About</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="#">Profile</a>
+                    <ul class="dropdown">
+
+                      {% if user.is_staff == 0 %}
+
+                      <li><a href="">- For Artists</a>
+                          <ul class="dropdown">
+                            <li><a href="{% url 'activate_creator' user.id %}">- Activate <i class="ti-check-box"></i></a></li>
+                          </ul>
+                      </li>
+
+                      {% elif user.is_staff == 1 %}
+
+                       <li><a href="">- For Artists</a>
+                          <ul class="dropdown">
+                            <li><a href="{% url 'deactivate_creator' user.id %}"><i class="ti-power-off"></i> Deactivate</a></li>
+                            <li><a href="{% url 'creator' %}">- Dashboard</a></li>
+                            <li><a href="#">- Settings</a></li>
+                          </ul>
+                      </li>
+
+                      {% endif %}
+
+                      <li><a href="{% url 'profile_settings' %}">- Settings</a></li>
+                      <li><a href="{% url 'logout' %}">- Logout</a></li>
+                    </ul>
+                  </li>
+                </ul>
+
+                  <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i class="ti-search"></i></div>
+              </div>
+
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+<div class="alime-portfolio-area section-padding-80 clearfix">
+  <div class="container-fluid">
+    <div class="row alime-portfolio">
+
+    </div>
+  </div>
+</div>
+
+
+<!---------------------Profile---------------------------->
+  <div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-sm-10" ><h3 style="color:black; text-transform:uppercase;">{{username}}</h3></div>
+    </div>
+    <div class="row">
+    	<div class="col-sm-12">
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                  <form class="form" action="{% url 'edit_userProfile' %}" method="POST" id="registrationForm"  enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                              {% for x in profile %}
+                                <img style="height:20em; width:20em;" src="{{x.ImageURL}}" class="avatar img-circle img-thumbnail" alt="avatar">
+                              {% endfor %}
+                          </div>
+                      </div>
+                      <div class="form-group">
+
+                          <div class="col-xs-6" >
+                              <label for="first_name"><h4 style="color:#FF5722;">First name</h4></label>
+                              <input type="text" class="form-control" name="first_name" id="first_name" value="{{user.first_name}}" >
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                             <label for="mobile"><h4 style="color:#FF5722;">Mobile</h4></label>
+                              {% for x in profile %}
+                              <input type="text" class="form-control" name="mobileNo" id="mobile" value="{{x.mobile_number}}" readonly>
+                              {% endfor %}
+                          </div>
+                      </div>
+                      <div class="form-group">
+
+                          <div class="col-xs-6">
+                              <label for="email"><h4 style="color:#FF5722;">Email</h4></label>
+                              <input type="email" class="form-control" name="email" id="email" value="{{user.email}}" readonly>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                         <div class="col-xs-6">
+                              <label for="user_image"><h4 style="color:#FF5722;">Upload Profile Image</h4></label>
+                              <input type="file" name="user_image">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                               <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                            </div>
+                      </div>
+
+                        <!-- button for adding img -->
+<!--                       &nbsp;&nbsp;&nbsp;-->
+<!--                        <div class="input-group form-group">-->
+<!--                        &nbsp; &nbsp; &nbsp; <button type="file" class="btn btn-primary" id="img-button">Add/Change DP</button>-->
+<!--                        </div>-->
+
+<!--                        &lt;!&ndash; result of cropped img &ndash;&gt;-->
+<!--                        <img id="cropped" class="cropped" src="">-->
+
+<!--                        &lt;!&ndash; hidden field &ndash;&gt;-->
+<!--                        <input class="d-none" style="display: none" type="file" id="file-input">-->
+<!--                        <textarea name="pro_img" class="d-none" style="display: none" id="imageBaseData"></textarea>-->
+
+              	</form>
+
+          </div><!--/tab-pane-->
+          </div><!--/tab-content-->
+        </div><!---Col sm -12-->
+    </div><!--row-->
+</div><!---/container-->
+<!------------------------//Profile---------------------------------------->
+
+
+<footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="footer-content d-flex align-items-center justify-content-between">
+
+          <div class="copywrite-text">
+            <p>
+              Copyright &copy;<script data-cfasync="false" src="https://preview.colorlib.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved.
+            </p>
+          </div>
+
+          <div class="footer-logo">
+            <a href="#"><img src="img/core-img/logo2.png" alt=""></a>
+          </div>
+
+          <div class="social-info">
+            <a href="#"><i class="ti-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-twitter-alt" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-linkedin" aria-hidden="true"></i></a>
+            <a href="#"><i class="ti-pinterest" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<script src="{% static 'cool/js/jquery.min.js' %}"></script>
+
+<script src="{% static 'cool/js/popper.min.js' %}"></script>
+
+<script src="{% static 'cool/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'cool/js/alime.bundle.js' %}"></script>
+
+<script src="{% static 'cool/js/default-assets/active.js' %}"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+</body>
+
+</html>

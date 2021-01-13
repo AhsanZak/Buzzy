@@ -29,7 +29,7 @@
             <button type="button" class="btn close-btn" data-dismiss="modal"><i class="ti-close"></i></button>
 
             <form action="" method="post">
-              <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enter...">
+              <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enterrr...">
               <button type="submit">Search</button>
             </form>
           </div>
@@ -38,110 +38,90 @@
     </div>
   </div>
 
-  <header class="header-area">
+  <!--- ImageModal -->
+<!-- Modal -->
+<div class="modal fade" id="ImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="{% static 'cool/img/bg-img/3.jpg' %}">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Download</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <header class="header-area" style="background-color: black !important;">
 
     <div class="main-header-area">
       <div class="classy-nav-container breakpoint-off">
-        <div class="container">
+        <div class="container" >
 
-          <nav class="classy-navbar justify-content-between" id="alimeNav">
+          <nav class="classy-navbar justify-content-between" id="alimeNav" >
 
-          <a class="nav-brand" href="/"><h1 style="color:white">BUZZY</h1></a>
+            <a class="nav-brand" href="/"><h1 style="color:white">BUZZY</h1></a>
 
-          <div class="classy-navbar-toggler">
-            <span class="navbarToggler"><span></span><span></span><span></span></span>
-          </div>
-
-          <div class="classy-menu">
-
-            <div class="classycloseIcon">
-              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+            <div class="classy-navbar-toggler">
+              <span class="navbarToggler"><span></span><span></span><span></span></span>
             </div>
 
-            <div class="classynav">
-              <ul id="nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="#">Profile</a>
-                  <ul class="dropdown">
+            <div class="classy-menu">
 
-                    {% if user.is_staff == 0 %}
+              <div class="classycloseIcon">
+                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+              </div>
 
-                    <li><a href="">- For Artists</a>
-                        <ul class="dropdown">
-                          <li><a href="{% url 'activate_creator' user.id %}">- Activate <i class="ti-check-box"></i></a></li>
-                        </ul>
-                    </li>
+              <div class="classynav">
+                <ul id="nav">
+                  <li class="active"><a href="/">Home</a></li>
+                  <li><a href="{% url 'about' %}">About</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="{% url 'profile_settings' %}">Profile</a>
+                    <ul class="dropdown">
 
-                    {% elif user.is_staff == 1 %}
+                      {% if user.is_staff == 0 %}
 
-                     <li><a href="">- For Artists</a>
-                        <ul class="dropdown">
-                          <li><a href="{% url 'deactivate_creator' user.id %}">- Deactivate</a></li>
-                          <li><a href="{% url 'creator' %}">- Dashboard</a></li>
-                          <li><a href="#">- Settings</a></li>
-                        </ul>
-                    </li>
+                      <li><a href="">- For Artists</a>
+                          <ul class="dropdown">
+                            <li><a href="{% url 'activate_creator' user.id %}">- Activate <i class="ti-check-box"></i></a></li>
+                          </ul>
+                      </li>
 
-                    {% endif %}
+                      {% elif user.is_staff == 1 %}
 
-                    <li><a href="{% url 'profile_settings' %}">- Settings</a></li>
-                    <li><a href="{% url 'logout' %}">- Logout</a></li>
-                  </ul>
-                </li>
-              </ul>
+                       <li><a href="">- For Artists</a>
+                          <ul class="dropdown">
+                            <li><a href="{% url 'deactivate_creator' user.id %}"><i class="ti-power-off"></i> Deactivate</a></li>
+                            <li><a href="{% url 'creator' %}">- Dashboard</a></li>
+                            <li><a href="#">- Settings</a></li>
+                          </ul>
+                      </li>
 
-                <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i class="ti-search"></i></div>
+                      {% endif %}
+
+                      <li><a href="{% url 'profile_settings' %}">- Settings</a></li>
+                      <li><a href="{% url 'logout' %}">- Logout</a></li>
+                    </ul>
+                  </li>
+                </ul>
+
+                  <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i class="ti-search"></i></div>
+              </div>
+
             </div>
-
-          </div>
           </nav>
         </div>
       </div>
     </div>
   </header>
-
-
-<section class="welcome-area">
-  <div class="welcome-slides owl-carousel">
-
-    <div class="single-welcome-slide bg-img bg-overlay" style="background-image: url({% static 'cool/img/bg-img/1.jpg' %});">
-      <div class="container h-100">
-        <div class="row h-100 align-items-center">
-
-          <div class="col-12 col-lg-8 col-xl-6">
-            <div class="welcome-text">
-              <h2 data-animation="bounceInDown" data-delay="900ms">Hello <br>I'm Jackson</h2>
-              <p data-animation="bounceInDown" data-delay="500ms">I photograph very instinctively. I see how it is taken like that. I do not follow certain styles, philosophies or teachers.</p>
-              <div class="hero-btn-group" data-animation="bounceInDown" data-delay="100ms">
-                <a href="#" class="btn alime-btn mb-3 mb-sm-0 mr-4">Get a Quote</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="single-welcome-slide bg-img bg-overlay" style="background-image: url({% static 'cool/img/bg-img/2.jpg' %});">
-      <div class="container h-100">
-        <div class="row h-100 align-items-center">
-
-          <div class="col-12 col-lg-8 col-xl-6">
-            <div class="welcome-text">
-              <h2 data-animation="bounceInUp" data-delay="100ms">Hello <br>I'm Alime</h2>
-              <p data-animation="bounceInUp" data-delay="500ms">I photograph very instinctively. I see how it is taken like that. I do not follow certain styles, philosophies or teachers.</p>
-              <div class="hero-btn-group" data-animation="bounceInUp" data-delay="900ms">
-                <a href="#" class="btn alime-btn mb-3 mb-sm-0 mr-4">Get a Quote</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <div class="alime-portfolio-area section-padding-80 clearfix">
   <div class="container-fluid">
@@ -163,10 +143,10 @@
 
       <div class="col-12 col-sm-6 col-lg-3 single_gallery_item nature mb-30 wow fadeInUp" data-wow-delay="100ms">
         <div class="single-portfolio-content">
-          <img src="{{image.ImageURL}}" alt="">
-          <div class="hover-content">
-            <a href="{{image.ImageURL}}" class="portfolio-img">+</a>
-          </div>
+          <a href="{% url 'view_single' image.id %}"><img src="{{image.ImageURL}}" alt=""></a>
+<!--          <div class="hover-content">-->
+<!--            <a data-toggle="modal" data-target="#ImageModal"><i class="ti-plus"></i></a>-->
+<!--          </div>-->
         </div>
       </div>
     {% endfor %}
@@ -179,44 +159,6 @@
     </div>
   </div>
 </div>
-
-
-<section class="follow-area clearfix">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="section-heading text-center">
-          <h2>Follow Instagram</h2>
-          <p>@Alime_photographer</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="instragram-feed-area owl-carousel">
-
-    <div class="single-instagram-item">
-    <img src="img/bg-img/11.jpg" alt="">
-    <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
-    <a href="#">
-    <i class="ti-instagram" aria-hidden="true"></i>
-    <span>Alime_photographer</span>
-    </a>
-    </div>
-    </div>
-
-    <div class="single-instagram-item">
-    <img src="img/bg-img/12.jpg" alt="">
-    <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
-    <a href="#">
-    <i class="ti-instagram" aria-hidden="true"></i>
-    <span>Alime_photographer</span>
-    </a>
-    </div>
-    </div>
-
-  </div>
-</section>
 
 
 <footer class="footer-area">

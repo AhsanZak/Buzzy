@@ -19,7 +19,11 @@
   <!-- Custom styles for this template-->
   <link href="{% static 'AdminPanel/css/sb-admin-2.min.css' %}" rel="stylesheet">
 
-<link rel="stylesheet" href="{% static 'cool/style.css' %}">
+  <link rel="stylesheet" href="{% static 'cool/style.css' %}">
+
+  <!-- Image Cropping -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css">
+
 </head>
 <body>
 
@@ -136,6 +140,12 @@
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
+    <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'creator' %}">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -188,14 +198,13 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Content Row -->
+         <!-- Content Row -->
           <div class="row">
-
-                <div class="col-md-6">
+              <div class="col-md-6">
                 <div class="card-body text-center">
                   <h6 class="mb-4 text-muted">Add a Wallpaper</h6>
 
-                  <form action="" method="POST" enctype="multipart/form-data">
+                  <form action="{% url 'creator_upload' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                       <input type="text" class="form-control" name="wallpaper_name" placeholder="Name" required>
@@ -219,6 +228,10 @@
                     <input class="d-none" type="file" id="file-input">
                     <textarea name="pro_img" class="d-none" id="imageBaseData"></textarea>
 
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="description" placeholder="Image Description" required>
+                    </div>
+
                     <button class="btn btn-primary shadow-2 mb-4">Add Image</button>
                   </form>
 
@@ -228,7 +241,6 @@
               <div class="col-md-6">
 
               </div>
-
           </div>
           <!-- Content Row -->
 
@@ -274,10 +286,14 @@
 </footer>
 
 
+  <!-- Bootstrap core JavaScript-->
+  <script src="{% static 'AdminPanel/vendor/jquery/jquery.min.js' %}"></script>
 
-<script src="{% static 'cool/js/jquery.min.js' %}"></script>
+ <!-- Image Cropping -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js"></script>
 
-<script src="{% static 'cool/js/popper.min.js' %}"></script>
+<!--<script src="{% static 'cool/js/jquery.min.js' %}"></script>-->
+
 
 <script src="{% static 'cool/js/bootstrap.min.js' %}"></script>
 
@@ -294,14 +310,86 @@
   gtag('config', 'UA-23581568-13');
 </script>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="{% static 'AdminPanel/vendor/jquery/jquery.min.js' %}"></script>
+
+     <!---- Add Image Modal ----->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Crop Image</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="box-2">
+            <div class="result"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" id="load" class="btn save btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- Core plugin JavaScript-->
-  <script src="{% static 'AdminPanel/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+<!--  <script src="{% static 'AdminPanel/vendor/jquery-easing/jquery.easing.min.js' %}"></script>-->
 
   <!-- Custom scripts for all pages-->
-  <script src="{% static 'AdminPanel/js/sb-admin-2.min.js' %}"></script>
+<!--  <script src="{% static 'AdminPanel/js/sb-admin-2.min.js' %}"></script>-->
+
+
+<script>
+
+    $("#img-button").click(function (e) {
+      $("#file-input").click();
+    });
+
+    let result = document.querySelector('.result'),
+      save = document.querySelector('.save'),
+      cropped = document.querySelector('.cropped'),
+      upload = document.querySelector('#file-input'),
+      cropper = '';
+
+    upload.addEventListener('change', (e) => {
+      if (e.target.files.length) {
+        // start file reader
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (e.target.result) {
+            // create new image
+            $("#exampleModalCenter").modal("show");
+            let img = document.createElement('img');
+            img.id = 'image';
+            img.src = e.target.result
+            // clean result before
+            result.innerHTML = '';
+            // append new image
+            result.appendChild(img);
+            // init cropper
+            cropper = new Cropper(img);
+          }
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    });
+
+    save.addEventListener('click', (e) => {
+      e.preventDefault();
+      // get result to data uri
+      let imgSrc = cropper.getCroppedCanvas({
+        width: 300 // img disp value
+      }).toDataURL();
+      $("#exampleModalCenter").modal("hide");
+      cropped.src = imgSrc;
+      $('#imageBaseData').val(imgSrc)
+    });
+
+  </script>
 
 </body>
 

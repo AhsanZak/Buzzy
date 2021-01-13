@@ -5,19 +5,22 @@ from .models import *
 from admin_panel.models import ImageDetail
 import mimetypes
 from wsgiref.util import FileWrapper
+from django.core.files.base import ContentFile
+import base64
+from PIL import Image
 
 
 def home(request):
     if request.user.is_authenticated:
         return redirect(user_home)
     else:
-        contents = ImageDetail.objects.all()
+        contents = ImageDetail.objects.filter(approval="approved")
         return render(request, 'User/index.html', {'contents': contents})
 
 
 def user_home(request):
     if request.user.is_authenticated:
-        contents = ImageDetail.objects.all()
+        contents = ImageDetail.objects.filter(approval="approved")
         user = request.user
         return render(request, 'User/home.html', {'contents': contents, 'user': user})
     else:
@@ -53,10 +56,11 @@ def login(request):
 
 def register(request):
     if request.method == 'POST':
-        first_name = request.POST['full_name']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        mobile_number = request.POST['mobile_no']
         email = request.POST['email']
         username = request.POST['username']
-        last_name = request.POST['mobileNo']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
 
@@ -72,9 +76,8 @@ def register(request):
                 return render(request, 'User/signup.html')
             else:
                 user = User.objects.create_user(username=username, password=password1, email=email,
-                                                first_name=first_name,
-                                                last_name=last_name)
-                user.save()
+                                                first_name=first_name, last_name=last_name)
+                UserProfile.objects.create(user=user, mobile_number=mobile_number)
                 return redirect('login')
         else:
             messages.info(request, "Passwords Not Matching")
@@ -96,6 +99,11 @@ def single(request, image_id):
     content = ImageDetail.objects.filter(id=image_id).first()
     print(content.image)
     return render(request, 'User/single.html', {'content': content})
+
+
+def view_single(request, image_id):
+    content = ImageDetail.objects.filter(id=image_id).first()
+    return render(request, 'User/view_single.html', {'content': content})
 
 
 def activate_creator(request, user_id):
@@ -122,21 +130,47 @@ def Deactivate_creator(request, user_id):
 
 def creator(request):
     if request.user.is_authenticated:
-        return render(request, 'User/creator.html')
+        no_pending = ImageDetail.objects.filter(user=request.user, approval="pending").count()
+        return render(request, 'User/creator.html', {'no_pending': no_pending})
     else:
         return redirect(login)
 
 
 def creator_contents(request):
     if request.user.is_authenticated:
-        return render(request, 'User/creator_contents.html')
+        contents = ImageDetail.objects.filter(user=request.user)
+        return render(request, 'User/creator_contents.html', {'contents': contents})
     else:
         return redirect(login)
 
 
 def creator_upload(request):
     if request.user.is_authenticated:
-        return render(request, 'User/creator_upload.html')
+        if request.method == 'POST':
+            name = request.POST['wallpaper_name']
+            price = request.POST['price']
+            category = request.POST['category']
+            image_data = request.POST['pro_img']
+            description = request.POST['description']
+
+            # creating a object
+            # creating thumbnail
+            # image.save('pythonthumb.png')
+            # image.show()
+
+            format, imgstr = image_data.split(';base64,')
+            ext = format.split('/')[-1]
+            data = ContentFile(base64.b64decode(imgstr), name=name + '.' + ext)
+
+            image = Image.open(r"C:\Users\ahsan\OneDrive\Desktop\ahsan.jpg")
+            MAX_SIZE = (100, 100)
+            thumbnail = image.thumbnail(MAX_SIZE)
+
+            ImageDetail.objects.create(name=name, category=category, price=price, image=data, user=request.user,
+                                       approval="pending", description=description)
+            return redirect(creator_upload)
+        else:
+            return render(request, 'User/creator_upload.html')
     else:
         return redirect(login)
 
@@ -146,7 +180,42 @@ def creator_settings(request):
 
 
 def profile_settings(request):
-    pass
+    if request.user.is_authenticated:
+        user = request.user
+        print(user)
+        profile = UserProfile.objects.filter(user=user)
+        print(profile)
+        return render(request, 'User/user_profile.html', {'profile': profile})
+    else:
+        return redirect(login)
+
+
+def edit_userProfile(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            user = request.user
+            user_image = request.FILES.get('user_image')
+            first_name = request.POST['first_name']
+
+            # if data is not None:
+            #     profilepic = UserProfile.objects.filter(user=user)
+            #     if not profilepic:
+            #         UserProfile.objects.create(user_image=data, user=user)
+            #     else:
+            #         user_profile1 = UserProfile.objects.get(user=user)
+            #         user_profile1.user_image = data
+            #         user_profile1.save()
+
+            user_profile = UserProfile.objects.get(user=user)
+            user_profile.user_image = user_image
+            user_profile.save()
+
+            return redirect(profile_settings)
+
+        else:
+            return redirect(profile_settings)
+    else:
+        return redirect(login)
 
 
 def download_image(request, image_id):

@@ -106,7 +106,8 @@
             <h6 class="collapse-header"></h6>
             <a class="collapse-item" href="{% url 'contents' %}">Contents</a>
             <a class="collapse-item" href="">Add a new Content</a>
-            <a class="collapse-item" href="">Approve Creator</a>
+            <a class="collapse-item" href="{% url 'approve_contents' %}">Approve Contents</a>
+            <a class="collapse-item" href="{% url 'disapprove_contents' %}">Disapprove Contents</a>
             <div class="collapse-divider"></div>
           </div>
         </div>
@@ -223,6 +224,7 @@
                     <div class="form-group">
                       <input type="text" class="form-control" name="category" placeholder="Category" required>
                     </div>
+                    <input class="" type="file" name="aaa">
 
                     <!-- button for adding img -->
                     <div class="input-group form-group">
