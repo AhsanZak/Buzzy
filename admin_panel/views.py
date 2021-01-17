@@ -6,6 +6,7 @@ import base64
 # importing Image class from PIL package
 from PIL import Image
 from user.models import UserProfile
+from thumbnails.fields import ImageField
 
 
 # Create your views here.

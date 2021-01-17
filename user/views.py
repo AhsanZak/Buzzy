@@ -8,6 +8,7 @@ from wsgiref.util import FileWrapper
 from django.core.files.base import ContentFile
 import base64
 from PIL import Image
+from thumbnails.fields import ImageField
 
 
 def home(request):
@@ -153,24 +154,27 @@ def creator_upload(request):
             name = request.POST['wallpaper_name']
             price = request.POST['price']
             category = request.POST['category']
-            image_data = request.POST['pro_img']
+            image = request.FILES['image']
             description = request.POST['description']
 
             # creating a object
             # creating thumbnail
             # image.save('pythonthumb.png')
             # image.show()
+            #
+            # format, imgstr = image_data.split(';base64,')
+            # ext = format.split('/')[-1]
+            # data = ContentFile(base64.b64decode(imgstr), name=name + '.' + ext)
 
-            format, imgstr = image_data.split(';base64,')
-            ext = format.split('/')[-1]
-            data = ContentFile(base64.b64decode(imgstr), name=name + '.' + ext)
+            # image = Image.open(r"C:\Users\ahsan\OneDrive\Desktop\ahsan.jpg")
+            # MAX_SIZE = (100, 100)
+            # thumbnail = image.thumbnail(MAX_SIZE)
 
-            image = Image.open(r"C:\Users\ahsan\OneDrive\Desktop\ahsan.jpg")
-            MAX_SIZE = (100, 100)
-            thumbnail = image.thumbnail(MAX_SIZE)
+            # image = ImageField(resize_source_to="large")
 
-            ImageDetail.objects.create(name=name, category=category, price=price, image=data, user=request.user,
-                                       approval="pending", description=description)
+            ImageDetail.objects.create(name=name, category=category, price=price, image=image, user=request.user,
+                                   approval="pending", description=description)
+
             return redirect(creator_upload)
         else:
             return render(request, 'User/creator_upload.html')

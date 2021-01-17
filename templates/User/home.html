@@ -1,4 +1,5 @@
 {% load static %}
+{% load imagekit %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -143,12 +144,13 @@
 
       <div class="col-12 col-sm-6 col-lg-3 single_gallery_item nature mb-30 wow fadeInUp" data-wow-delay="100ms">
         <div class="single-portfolio-content">
-          <a href="{% url 'view_single' image.id %}"><img src="{{image.ImageURL}}" alt=""></a>
+          <a href="{% url 'view_single' image.id %}"><img src="{{image.image_thumbnail.url}}" alt="thumbnail"></a>
 <!--          <div class="hover-content">-->
 <!--            <a data-toggle="modal" data-target="#ImageModal"><i class="ti-plus"></i></a>-->
 <!--          </div>-->
         </div>
       </div>
+
     {% endfor %}
 
     </div>
